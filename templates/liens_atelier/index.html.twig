@@ -1,16 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Atelier du tiers-Inclus{% endblock %}
+{% block title %}Atelier du tiers-Inclus
+{% endblock %}
 
 {% block body %}
 
 
-<div class="flex flex-col items-center">
-<a class="no-underline text-black w-70 p-6" href="https://dpurroy.wixsite.com/projets/cite-balzac" target="_blank">Projet cité Balzac</a>
-<a class="no-underline text-black w-70 p-6" href="https://dpurroy.wixsite.com/carte" target="_blank">Foyer Malien</a>
-<a class="no-underline text-black w-70 p-6" href="">L'Atelier des Ardoines</a>
-<a class="no-underline text-black w-70 p-6" href="{{path('app_home')}}">Retour à la page précédente</a>
+	<div class="flex flex-col items-center">
 
-</div>
+		<a class="no-underline text-black w-70 p-6" href="https://dpurroy.wixsite.com/projets/cite-balzac" target="_blank">
+			Projet cité Balzac
+		</a>
+		<a class="no-underline text-black w-70 p-6" href="https://dpurroy.wixsite.com/carte" target="_blank">
+			Foyer Malien
+		</a>
+		<a class="no-underline text-black w-70 p-6" href="">
+			L'Atelier des Ardoines
+		</a>
+		<a class="no-underline text-black w-70 p-6" href="{{ path('app_home') }}" data-direction="left">
+			Retour à la page précédente
+		</a>
+
+	</div>
 
 {% endblock %}

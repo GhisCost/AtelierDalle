@@ -7,24 +7,24 @@
 
 
 	<div class="relative h-screen">
-		<div class="w-70 absolute left-50 bottom-80">
-			<a href="">
+		<div class="w-70 absolute left-50 bottom-80 hover:scale-150">
+			 <a href="{#{{ path('app_laboratoire') }}#}" data-direction="left"> 
 				<div>
 					<img class="size-full" src="{{asset('assets/img/biblioTemp.jpg')}}" alt="">
 				</div>
 				<p class="text-center">Laboratoire de la pensée</p>
 			</a>
 		</div>
-		<div class="w-70 absolute right-140 bottom-20">
-			<a href="">
+		<div class="w-70 absolute right-140 bottom-20 hover:scale-150">
+			<a href="{#{{ path('app_chantier') }}#}" data-direction="bottom">
 				<div>
 					<img class="size-full" src="{{asset('assets/img/chantierTemp.png')}}" alt="">
 				</div>
 				<p class="text-center">Chantier</p>
 			</a>
 		</div>
-		<div class="w-70 absolute right-40 top-20">
-			<a href="{{path('app_atelier')}}">
+		<div class="w-70 absolute right-40 top-20 hover:scale-150">
+			<a href="{{ path('app_atelier') }}" data-direction="right">
 				<div >
 					<img class="size-full" src="{{asset('assets/img/paletteTemp.png')}}" alt="">
 				</div>
