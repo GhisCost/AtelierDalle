@@ -33,3 +33,7 @@
 .page-transition.show {
   transform: translate(0, 0);
 }
+
+#canvas{
+  position:absolute;
+}
