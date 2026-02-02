@@ -57,193 +57,228 @@ function loadPage(url, direction) {
 }
 
 
-//Test canvas
-
-// let canva = document.querySelector("canvas");
-
-// if(canva){
-
-// let context = canva.getContext("2d");
-// let connections = [];
-// let lignes = [];
+function initCanvas() {
+  const canva = document.getElementById("canvas");
  
-// function resizeCanvas() {
-//   canva.width = window.innerWidth;
-//   canva.height = window.innerHeight;
-// }
+  if (!canva) {
+    console.error("Canvas con id='canvas' non trovato");
+    return;
+  }
  
-// class Ligne {
-//   constructor(x1, y1, x2, y2, direction = 1) {
-//     this.x1 = x1;
-//     this.y1 = y1;
-//     this.x2 = x2;
-//     this.y2 = y2;
+  const context = canva.getContext("2d");
  
-//     this.progress = 0;
-//     this.speed = 0.045;
+  let connections = [];
+  let lignes = [];
  
-//     const dx = x2 - x1;
-//     const dy = y2 - y1;
+  function resizeCanvas() {
+    canva.width = window.innerWidth;
+    canva.height = window.innerHeight;
+  }
  
-//     // direction: 1 = destra, -1 = sinistra
-//     this.cx = (x1 + x2) / 2 + dy * direction;
-//     this.cy = (y1 + y2) / 2 - dx * direction;
-//   }
+  class Ligne {
+    constructor(x1, y1, x2, y2, direction = 1) {
+      this.x1 = x1;
+      this.y1 = y1;
+      this.x2 = x2;
+      this.y2 = y2;
  
-//   getPoint(t) {
-//     const x =
-//       (1 - t) * (1 - t) * this.x1 + 2 * (1 - t) * t * this.cx + t * t * this.x2;
+      this.progress = 0;
+      this.speed = 0.045;
  
-//     const y =
-//       (1 - t) * (1 - t) * this.y1 + 2 * (1 - t) * t * this.cy + t * t * this.y2;
+      const dx = x2 - x1;
+      const dy = y2 - y1;
  
-//     return { x, y };
-//   }
+      // direction: 1 = destra, -1 = sinistra
+      this.cx = (x1 + x2) / 2 + dy * direction;
+      this.cy = (y1 + y2) / 2 - dx * direction;
+    }
  
-//   draw() {
-//     context.beginPath();
-//     const steps = 60;
-//     const maxT = Math.min(this.progress, 1);
+    getPoint(t) {
+      const x =
+        (1 - t) * (1 - t) * this.x1 +
+        2 * (1 - t) * t * this.cx +
+        t * t * this.x2;
  
-//     for (let i = 0; i <= steps * maxT; i++) {
-//       const t = i / steps;
-//       const p = this.getPoint(t);
-//       if (i === 0) context.moveTo(p.x, p.y);
-//       else context.lineTo(p.x, p.y);
-//     }
+      const y =
+        (1 - t) * (1 - t) * this.y1 +
+        2 * (1 - t) * t * this.cy +
+        t * t * this.y2;
  
-//     context.stroke();
+      return { x, y };
+    }
  
-//     // 👉 disegna la freccia solo a fine animazione
-//     if (this.progress >= 1) this.drawArrow();
-//   }
+    draw() {
+      context.beginPath();
+      const steps = 60;
+      const maxT = Math.min(this.progress, 1);
  
-//   drawArrow() {
-//     const p1 = this.getPoint(0.98);
-//     const p2 = this.getPoint(1);
+      for (let i = 0; i <= steps * maxT; i++) {
+        const t = i / steps;
+        const p = this.getPoint(t);
+        if (i === 0) context.moveTo(p.x, p.y);
+        else context.lineTo(p.x, p.y);
+      }
  
-//     const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
-//     const size = 10;
+      context.stroke();
  
-//     context.beginPath();
-//     context.moveTo(p2.x, p2.y);
-//     context.lineTo(
-//       p2.x - size * Math.cos(angle - Math.PI / 6),
-//       p2.y - size * Math.sin(angle - Math.PI / 6)
-//     );
-//     context.lineTo(
-//       p2.x - size * Math.cos(angle + Math.PI / 6),
-//       p2.y - size * Math.sin(angle + Math.PI / 6)
-//     );
-//     context.closePath();
-//     context.fill();
-//   }
+      // disegna la freccia solo a fine animazione
+      if (this.progress >= 1) this.drawArrow();
+    }
  
-//   update() {
-//     if (this.progress < 1) this.progress += this.speed;
-//   }
-// }
+    drawArrow() {
+      const p1 = this.getPoint(0.98);
+      const p2 = this.getPoint(1);
  
-// function buildLine(config) {
-//   const {
-//     sources = [],
-//     targets = [],
-//     side = "bottom",
-//     targetSide = "top",
-//     curveStrength = 0.3,
-//   } = config;
+      const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+      const size = 10;
  
-//   sources.forEach((source, sIndex) => {
-//     const src = source.getBoundingClientRect();
-//     let startX, startY;
+      context.beginPath();
+      context.moveTo(p2.x, p2.y);
+      context.lineTo(
+        p2.x - size * Math.cos(angle - Math.PI / 6),
+        p2.y - size * Math.sin(angle - Math.PI / 6)
+      );
+      context.lineTo(
+        p2.x - size * Math.cos(angle + Math.PI / 6),
+        p2.y - size * Math.sin(angle + Math.PI / 6)
+      );
+      context.closePath();
+      context.fill();
+    }
  
-//     switch (side) {
-//       case "top":
-//         startX = src.left + src.width / 2;
-//         startY = src.top + window.scrollY;
-//         break;
-//       case "left":
-//         startX = src.left;
-//         startY = src.top + src.height / 2 + window.scrollY;
-//         break;
-//       case "right":
-//         startX = src.right;
-//         startY = src.top + src.height / 2 + window.scrollY;
-//         break;
-//       default: // bottom
-//         startX = src.left + src.width / 2;
-//         startY = src.bottom + window.scrollY;
-//     }
+    update() {
+      if (this.progress < 1) this.progress += this.speed;
+    }
+  }
  
-//     targets.forEach((target, index) => {
-//       const trg = target.getBoundingClientRect();
-//       let endX, endY;
+  function buildLine(config) {
+    const {
+      sources = [],
+      targets = [],
+      side = "bottom",
+      targetSide = "top",
+      curveStrength = 0.3,
+    } = config;
  
-//       switch (targetSide) {
-//         case "right":
-//           endX = trg.right;
-//           endY = trg.top + trg.height / 2 + window.scrollY;
-//           break;
-//         case "left":
-//           endX = trg.left;
-//           endY = trg.top + trg.height / 2 + window.scrollY;
-//           break;
-//         case "top":
-//           endX = trg.left + trg.width / 2;
-//           endY = trg.top + window.scrollY;
-//           break;
-//         default:
-//           endX = trg.left + trg.width / 2;
-//           endY = trg.bottom + window.scrollY;
-//       }
+    sources.forEach((source, sIndex) => {
+      const src = source.getBoundingClientRect();
+      let startX, startY;
  
-//       const direction = (sIndex + index) % 2 === 0 ? 1 : -1;
-//       lignes.push(
-//         new Ligne(startX, startY, endX, endY, direction * curveStrength)
-//       );
-//       target.style.opacity = 1;
-//     });
-//   });
-// }
-// function rebuildLines() {
-//   lignes = [];
-//   connections.forEach(buildLine);
-// }
+      switch (side) {
+        case "top":
+          startX = src.left + src.width / 2;
+          startY = src.top + window.scrollY;
+          break;
+        case "left":
+          startX = src.left;
+          startY = src.top + src.height / 2 + window.scrollY;
+          break;
+        case "right":
+          startX = src.right;
+          startY = src.top + src.height / 2 + window.scrollY;
+          break;
+        default:
+          startX = src.left + src.width / 2;
+          startY = src.bottom + window.scrollY;
+      }
  
-// function init(config) {
-//   if (!connections.includes(config)) connections.push(config);
-//   buildLine(config);
-// }
+      targets.forEach((target, index) => {
+        const trg = target.getBoundingClientRect();
+        let endX, endY;
  
-// function animate() {
-//   context.clearRect(0, 0, canva.width, canva.height);
+        switch (targetSide) {
+          case "right":
+            endX = trg.right;
+            endY = trg.top + trg.height / 2 + window.scrollY;
+            break;
+          case "left":
+            endX = trg.left;
+            endY = trg.top + trg.height / 2 + window.scrollY;
+            break;
+          case "top":
+            endX = trg.left + trg.width / 2;
+            endY = trg.top + window.scrollY;
+            break;
+          default:
+            endX = trg.left + trg.width / 2;
+            endY = trg.bottom + window.scrollY;
+        }
  
-//   lignes.forEach((l) => {
-//     l.draw();
-//     l.update();
-//   });
+        const direction = (sIndex + index) % 2 === 0 ? 1 : -1;
  
-//   requestAnimationFrame(animate);
-// }
-
-// let un = document.getElementById("un");
-// let deux = document.getElementById("deux");
-// let trois = document.getElementById("trois");
-// resizeCanvas();
-
-// const steps = [
-//     ()=>init({sources:[un],targets:[deux],side:"right",targetSide:"left"}),()=>init({sources:[deux],targets:[trois],side:"right",targetSide:"bottom"}),
-// ];
-// let step=0;
-// function playNext(){
-//     if(step>=steps.length) return;
-//     steps[step++]();
-//     setTimeout(playNext,1200);
-// }
-
-// document.addEventListener("DOMContentLoaded",()=>{
-//     resizeCanvas();
-//     animate();
-//     playNext();
-// })
-// }
+        lignes.push(
+          new Ligne(startX, startY, endX, endY, direction * curveStrength)
+        );
+ 
+        target.style.opacity = 1;
+      });
+    });
+  }
+ 
+  function rebuildLines() {
+    lignes = [];
+    connections.forEach(buildLine);
+  }
+ 
+  function init(config) {
+    if (!connections.includes(config)) connections.push(config);
+    buildLine(config);
+  }
+ 
+  function animate() {
+    context.clearRect(0, 0, canva.width, canva.height);
+ 
+    lignes.forEach((l) => {
+      l.draw();
+      l.update();
+    });
+ 
+    requestAnimationFrame(animate);
+  }
+ 
+  const uno = document.getElementById("un");
+  const due = document.getElementById("deux");
+  const tre = document.getElementById("trois");
+ 
+  resizeCanvas();
+ 
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    lignes = [];
+    rebuildLines();
+  });
+ 
+  if (uno && due && tre) {
+    const steps = [
+      () =>
+        init({
+          sources: [uno],
+          targets: [due],
+          side: "right",
+          targetSide: "left",
+        }),
+      () =>
+        init({
+          sources: [due],
+          targets: [tre],
+          side: "top",
+          targetSide: "left",
+        }),
+    ];
+ 
+    let step = 0;
+ 
+    function playNext() {
+      if (step >= steps.length) return;
+      steps[step++]();
+      setTimeout(playNext, 1200);
+    }
+ 
+    animate();
+    playNext();
+  }
+};
+ 
+document.addEventListener("DOMContentLoaded", () =>{
+    initCanvas();
+})
