@@ -10,7 +10,7 @@ header {
 }
  
 header:hover {
-    transform: scale(1.9);
+    transform: scale(1.5);
 }
 #hiddentext{
     position: absolute;
