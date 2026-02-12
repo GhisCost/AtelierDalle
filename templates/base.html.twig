@@ -15,9 +15,10 @@
             <script src="{{asset('assets/js/transition.js')}}"></script>
         {% endblock %}
     </head>
-  <body>
+  <body class="bg-white">
     
     <div id="page-container">
+    <div id="cursor"></div>
         <div class="corps">
          {% include "_partials/_header.html.twig" %}
         {% block body %}{% endblock %}

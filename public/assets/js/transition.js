@@ -1,3 +1,21 @@
+document.addEventListener('DOMContentLoaded', () => {
+const cursor = document.getElementById('cursor');
+
+        let x = 0, y = 0;
+ 
+        document.addEventListener('mousemove', e => {
+            x = e.clientX;
+            y = e.clientY;
+        });
+ 
+        function animate() {
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+            requestAnimationFrame(animate);
+        }
+        animate();
+});
+
 document.addEventListener("click", function (e) {
     const link = e.target.closest("a");
     if (!link) return;
@@ -52,11 +70,12 @@ function loadPage(url, direction) {
                 }
                 history.pushState({}, "", url);
             }, 700);
+            animate();
         })
         .catch((err) => console.error(err));
 }
 
-
+if(document.getElementById("canvas")){
 function initCanvas() {
   const canva = document.getElementById("canvas");
  
@@ -282,3 +301,5 @@ function initCanvas() {
 document.addEventListener("DOMContentLoaded", () =>{
     initCanvas();
 })
+}
+
