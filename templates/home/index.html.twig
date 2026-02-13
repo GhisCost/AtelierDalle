@@ -8,11 +8,11 @@
 
 	<div class="relative h-screen">
 		<div class="w-70 absolute left-50 bottom-80 hover:scale-150 shadow-md/50 transition duration-450 ease-in-out" id="un">
-			 <a href="{#{{ path('app_laboratoire') }}#}" data-direction="left"> 
+			 <a href="{{ path('app_home') }}" data-direction="left"> 
 				<div>
 					<img class="size-full" src="{{asset('assets/img/biblioTemp.jpg')}}" alt="">
 				</div>
-				<p class="text-center">Laboratoire de la pensée</p>
+				<p class="text-center">Les dispositifs</p>
 			</a>
 		</div>
 		<div class="w-70 absolute right-140 bottom-20 hover:scale-150 shadow-md/50 transition duration-450 ease-in-out" id="deux">
@@ -22,6 +22,9 @@
 				</div>
 				<p class="text-center">Chantier</p>
 			</a>
+		</div>
+		<div class=" absolute top-50 left-190 w-20 h-20 border-solid border-black border rounded-full flex items-center justify-center" >
+		<p class="text-center" >Le Projet</p>
 		</div>
 		<div class="w-70 absolute right-40 top-20 hover:scale-150 shadow-md/50 transition duration-450 ease-in-out" id="trois">
 			<a href="{{ path('app_atelier')}}" data-direction="right">
