@@ -23,7 +23,6 @@
   height: 100%;
   background: rgb(255, 255, 255);
   z-index: 50;
-
   transition: transform 1s ease;
 }
 
@@ -47,20 +46,19 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background: white;           /* Bianco iniziale */
+        background: white;         
+          /* Blanc de base */
         position: fixed;
         pointer-events: none;
-        mix-blend-mode: difference;  /* Cambia colore automaticamente in base allo sfondo */
+         mix-blend-mode: difference; 
+         /* Change la couleur automatiquement en fonction du fond  */
         transform: translate(-50%, -50%);
         z-index: 9999;
-        transition: width 0.2s, height 0.2s; /* opzionale: animazioni morbide */
+        transition: width 0.2s, height 0.2s;
+         /* optionelle: animation fluide */
     }
 
-
 /* Minimap */
-
-
-
 
 header {
     background-color: #ffffff00;
