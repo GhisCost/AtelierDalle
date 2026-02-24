@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BarrieresRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,17 @@ class Barrieres
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, MediaBarrieres>
+     */
+    #[ORM\OneToMany(targetEntity: MediaBarrieres::class, mappedBy: 'Id_Barrieres')]
+    private Collection $mediaBarrieres;
+
+    public function __construct()
+    {
+        $this->mediaBarrieres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +58,36 @@ class Barrieres
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MediaBarrieres>
+     */
+    public function getMediaBarrieres(): Collection
+    {
+        return $this->mediaBarrieres;
+    }
+
+    public function addMediaBarriere(MediaBarrieres $mediaBarriere): static
+    {
+        if (!$this->mediaBarrieres->contains($mediaBarriere)) {
+            $this->mediaBarrieres->add($mediaBarriere);
+            $mediaBarriere->setIdBarrieres($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediaBarriere(MediaBarrieres $mediaBarriere): static
+    {
+        if ($this->mediaBarrieres->removeElement($mediaBarriere)) {
+            // set the owning side to null (unless already changed)
+            if ($mediaBarriere->getIdBarrieres() === $this) {
+                $mediaBarriere->setIdBarrieres(null);
+            }
+        }
 
         return $this;
     }

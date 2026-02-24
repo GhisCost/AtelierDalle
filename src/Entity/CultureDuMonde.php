@@ -46,12 +46,26 @@ class CultureDuMonde
     #[ORM\OneToMany(targetEntity: GastronomieDalle::class, mappedBy: 'Id_CultureMonde')]
     private Collection $gastronomieDalles;
 
+    /**
+     * @var Collection<int, ObjetCulture>
+     */
+    #[ORM\OneToMany(targetEntity: ObjetCulture::class, mappedBy: 'Id_Culture')]
+    private Collection $objetCultures;
+
+    /**
+     * @var Collection<int, SymboleCulture>
+     */
+    #[ORM\OneToMany(targetEntity: SymboleCulture::class, mappedBy: 'Id_Culture')]
+    private Collection $symboleCultures;
+
     public function __construct()
     {
         $this->mediaCultures = new ArrayCollection();
         $this->evenementCultures = new ArrayCollection();
         $this->texteCultures = new ArrayCollection();
         $this->gastronomieDalles = new ArrayCollection();
+        $this->objetCultures = new ArrayCollection();
+        $this->symboleCultures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +211,66 @@ class CultureDuMonde
             // set the owning side to null (unless already changed)
             if ($gastronomieDalle->getIdCultureMonde() === $this) {
                 $gastronomieDalle->setIdCultureMonde(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ObjetCulture>
+     */
+    public function getObjetCultures(): Collection
+    {
+        return $this->objetCultures;
+    }
+
+    public function addObjetCulture(ObjetCulture $objetCulture): static
+    {
+        if (!$this->objetCultures->contains($objetCulture)) {
+            $this->objetCultures->add($objetCulture);
+            $objetCulture->setIdCulture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeObjetCulture(ObjetCulture $objetCulture): static
+    {
+        if ($this->objetCultures->removeElement($objetCulture)) {
+            // set the owning side to null (unless already changed)
+            if ($objetCulture->getIdCulture() === $this) {
+                $objetCulture->setIdCulture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SymboleCulture>
+     */
+    public function getSymboleCultures(): Collection
+    {
+        return $this->symboleCultures;
+    }
+
+    public function addSymboleCulture(SymboleCulture $symboleCulture): static
+    {
+        if (!$this->symboleCultures->contains($symboleCulture)) {
+            $this->symboleCultures->add($symboleCulture);
+            $symboleCulture->setIdCulture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSymboleCulture(SymboleCulture $symboleCulture): static
+    {
+        if ($this->symboleCultures->removeElement($symboleCulture)) {
+            // set the owning side to null (unless already changed)
+            if ($symboleCulture->getIdCulture() === $this) {
+                $symboleCulture->setIdCulture(null);
             }
         }
 

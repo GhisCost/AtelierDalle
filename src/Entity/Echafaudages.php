@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EchafaudagesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,17 @@ class Echafaudages
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    /**
+     * @var Collection<int, MediaEchafaudages>
+     */
+    #[ORM\OneToMany(targetEntity: MediaEchafaudages::class, mappedBy: 'Id_Echafaudage')]
+    private Collection $mediaEchafaudages;
+
+    public function __construct()
+    {
+        $this->mediaEchafaudages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -45,6 +58,36 @@ class Echafaudages
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MediaEchafaudages>
+     */
+    public function getMediaEchafaudages(): Collection
+    {
+        return $this->mediaEchafaudages;
+    }
+
+    public function addMediaEchafaudage(MediaEchafaudages $mediaEchafaudage): static
+    {
+        if (!$this->mediaEchafaudages->contains($mediaEchafaudage)) {
+            $this->mediaEchafaudages->add($mediaEchafaudage);
+            $mediaEchafaudage->setIdEchafaudage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediaEchafaudage(MediaEchafaudages $mediaEchafaudage): static
+    {
+        if ($this->mediaEchafaudages->removeElement($mediaEchafaudage)) {
+            // set the owning side to null (unless already changed)
+            if ($mediaEchafaudage->getIdEchafaudage() === $this) {
+                $mediaEchafaudage->setIdEchafaudage(null);
+            }
+        }
 
         return $this;
     }
