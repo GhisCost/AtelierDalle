@@ -18,15 +18,12 @@ class ObjetHabitant
 
     #[ORM\ManyToOne(inversedBy: 'objetHabitants')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?PortraitHabitant $Id_Habitant = null;
+    private ?PortraitHabitant $habitant = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    /**
-     * @var Collection<int, MediaObjet>
-     */
-    #[ORM\OneToMany(targetEntity: MediaObjet::class, mappedBy: 'Id_Objet')]
+    #[ORM\OneToMany(mappedBy: 'objet', targetEntity: MediaObjet::class)]
     private Collection $mediaObjets;
 
     public function __construct()
@@ -39,15 +36,14 @@ class ObjetHabitant
         return $this->id;
     }
 
-    public function getIdHabitant(): ?PortraitHabitant
+    public function getHabitant(): ?PortraitHabitant
     {
-        return $this->Id_Habitant;
+        return $this->habitant;
     }
 
-    public function setIdHabitant(?PortraitHabitant $Id_Habitant): static
+    public function setHabitant(?PortraitHabitant $habitant): self
     {
-        $this->Id_Habitant = $Id_Habitant;
-
+        $this->habitant = $habitant;
         return $this;
     }
 
@@ -56,10 +52,9 @@ class ObjetHabitant
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -71,22 +66,21 @@ class ObjetHabitant
         return $this->mediaObjets;
     }
 
-    public function addMediaObjet(MediaObjet $mediaObjet): static
+    public function addMediaObjet(MediaObjet $mediaObjet): self
     {
         if (!$this->mediaObjets->contains($mediaObjet)) {
             $this->mediaObjets->add($mediaObjet);
-            $mediaObjet->setIdObjet($this);
+            $mediaObjet->setObjet($this);
         }
 
         return $this;
     }
 
-    public function removeMediaObjet(MediaObjet $mediaObjet): static
+    public function removeMediaObjet(MediaObjet $mediaObjet): self
     {
         if ($this->mediaObjets->removeElement($mediaObjet)) {
-            // set the owning side to null (unless already changed)
-            if ($mediaObjet->getIdObjet() === $this) {
-                $mediaObjet->setIdObjet(null);
+            if ($mediaObjet->getObjet() === $this) {
+                $mediaObjet->setObjet(null);
             }
         }
 

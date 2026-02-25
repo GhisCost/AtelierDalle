@@ -16,21 +16,15 @@ class PortraitNonHabitant
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Prenom = null;
+    private ?string $prenom = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Role = null;
+    private ?string $role = null;
 
-    /**
-     * @var Collection<int, MediaPortrait>
-     */
-    #[ORM\OneToMany(targetEntity: MediaPortrait::class, mappedBy: 'Id_Portrait_NonHabitant')]
+    #[ORM\OneToMany(mappedBy: 'portraitNonHabitant', targetEntity: MediaPortrait::class)]
     private Collection $mediaPortraits;
 
-    /**
-     * @var Collection<int, TextePortrait>
-     */
-    #[ORM\OneToMany(targetEntity: TextePortrait::class, mappedBy: 'Id_PortraitNonHabitant')]
+    #[ORM\OneToMany(mappedBy: 'portraitNonHabitant', targetEntity: TextePortrait::class)]
     private Collection $textePortraits;
 
     public function __construct()
@@ -46,25 +40,23 @@ class PortraitNonHabitant
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): static
+    public function setPrenom(string $prenom): self
     {
-        $this->Prenom = $Prenom;
-
+        $this->prenom = $prenom;
         return $this;
     }
 
     public function getRole(): ?string
     {
-        return $this->Role;
+        return $this->role;
     }
 
-    public function setRole(string $Role): static
+    public function setRole(string $role): self
     {
-        $this->Role = $Role;
-
+        $this->role = $role;
         return $this;
     }
 
@@ -76,22 +68,21 @@ class PortraitNonHabitant
         return $this->mediaPortraits;
     }
 
-    public function addMediaPortrait(MediaPortrait $mediaPortrait): static
+    public function addMediaPortrait(MediaPortrait $mediaPortrait): self
     {
         if (!$this->mediaPortraits->contains($mediaPortrait)) {
             $this->mediaPortraits->add($mediaPortrait);
-            $mediaPortrait->setIdPortraitNonHabitant($this);
+            $mediaPortrait->setPortraitNonHabitant($this);
         }
 
         return $this;
     }
 
-    public function removeMediaPortrait(MediaPortrait $mediaPortrait): static
+    public function removeMediaPortrait(MediaPortrait $mediaPortrait): self
     {
         if ($this->mediaPortraits->removeElement($mediaPortrait)) {
-            // set the owning side to null (unless already changed)
-            if ($mediaPortrait->getIdPortraitNonHabitant() === $this) {
-                $mediaPortrait->setIdPortraitNonHabitant(null);
+            if ($mediaPortrait->getPortraitNonHabitant() === $this) {
+                $mediaPortrait->setPortraitNonHabitant(null);
             }
         }
 
@@ -106,25 +97,29 @@ class PortraitNonHabitant
         return $this->textePortraits;
     }
 
-    public function addTextePortrait(TextePortrait $textePortrait): static
+    public function addTextePortrait(TextePortrait $textePortrait): self
     {
         if (!$this->textePortraits->contains($textePortrait)) {
             $this->textePortraits->add($textePortrait);
-            $textePortrait->setIdPortraitNonHabitant($this);
+            $textePortrait->setPortraitNonHabitant($this);
         }
 
         return $this;
     }
 
-    public function removeTextePortrait(TextePortrait $textePortrait): static
+    public function removeTextePortrait(TextePortrait $textePortrait): self
     {
         if ($this->textePortraits->removeElement($textePortrait)) {
-            // set the owning side to null (unless already changed)
-            if ($textePortrait->getIdPortraitNonHabitant() === $this) {
-                $textePortrait->setIdPortraitNonHabitant(null);
+            if ($textePortrait->getPortraitNonHabitant() === $this) {
+                $textePortrait->setPortraitNonHabitant(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->prenom ?? '';
     }
 }

@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaPortraitRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaPortraitRepository::class)]
+#[Vich\Uploadable]
 class MediaPortrait
 {
     #[ORM\Id]
@@ -13,29 +16,50 @@ class MediaPortrait
     #[ORM\Column]
     private ?int $id = null;
 
+    // Association avec PortraitHabitant
     #[ORM\ManyToOne(inversedBy: 'mediaPortraits')]
-    private ?PortraitHabitant $Id_Portrait = null;
+    private ?PortraitHabitant $portraitHabitant = null;
 
-    #[ORM\Column(length: 255)]
+    // Association avec PortraitNonHabitant
+    #[ORM\ManyToOne(inversedBy: 'mediaPortraits')]
+    private ?PortraitNonHabitant $portraitNonHabitant = null;
+
+    // Nom du fichier stocké en base
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $contenu = null;
 
-    #[ORM\ManyToOne(inversedBy: 'mediaPortraits')]
-    private ?PortraitNonHabitant $Id_Portrait_NonHabitant = null;
+    // Champ de type File pour le formulaire upload
+    #[Vich\UploadableField(mapping: 'media_portrait', fileNameProperty: 'contenu')]
+    private ?File $file = null;
+
+    // Champ pour forcer Doctrine à détecter la modification
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdPortrait(): ?PortraitHabitant
+    public function getPortraitHabitant(): ?PortraitHabitant
     {
-        return $this->Id_Portrait;
+        return $this->portraitHabitant;
     }
 
-    public function setIdPortrait(?PortraitHabitant $Id_Portrait): static
+    public function setPortraitHabitant(?PortraitHabitant $portraitHabitant): static
     {
-        $this->Id_Portrait = $Id_Portrait;
+        $this->portraitHabitant = $portraitHabitant;
+        return $this;
+    }
 
+    public function getPortraitNonHabitant(): ?PortraitNonHabitant
+    {
+        return $this->portraitNonHabitant;
+    }
+
+    public function setPortraitNonHabitant(?PortraitNonHabitant $portraitNonHabitant): static
+    {
+        $this->portraitNonHabitant = $portraitNonHabitant;
         return $this;
     }
 
@@ -44,22 +68,26 @@ class MediaPortrait
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): static
+    public function setContenu(?string $contenu): void
     {
         $this->contenu = $contenu;
-
-        return $this;
     }
 
-    public function getIdPortraitNonHabitant(): ?PortraitNonHabitant
+    public function setFile(?File $file = null): void
     {
-        return $this->Id_Portrait_NonHabitant;
+        $this->file = $file;
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
-    public function setIdPortraitNonHabitant(?PortraitNonHabitant $Id_Portrait_NonHabitant): static
+    public function getFile(): ?File
     {
-        $this->Id_Portrait_NonHabitant = $Id_Portrait_NonHabitant;
+        return $this->file;
+    }
 
-        return $this;
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

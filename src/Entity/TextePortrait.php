@@ -15,52 +15,51 @@ class TextePortrait
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'textePortraits')]
-    private ?PortraitHabitant $Id_PortraitHabitant = null;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?PortraitHabitant $portraitHabitant = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $Contenu = null;
+    private ?string $contenu = null;
 
     #[ORM\ManyToOne(inversedBy: 'textePortraits')]
-    private ?PortraitNonHabitant $Id_PortraitNonHabitant = null;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?PortraitNonHabitant $portraitNonHabitant = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdPortraitHabitant(): ?PortraitHabitant
+    public function getPortraitHabitant(): ?PortraitHabitant
     {
-        return $this->Id_PortraitHabitant;
+        return $this->portraitHabitant;
     }
 
-    public function setIdPortraitHabitant(?PortraitHabitant $Id_PortraitHabitant): static
+    public function setPortraitHabitant(?PortraitHabitant $portraitHabitant): self
     {
-        $this->Id_PortraitHabitant = $Id_PortraitHabitant;
+        $this->portraitHabitant = $portraitHabitant;
+        return $this;
+    }
 
+    public function getPortraitNonHabitant(): ?PortraitNonHabitant
+    {
+        return $this->portraitNonHabitant;
+    }
+
+    public function setPortraitNonHabitant(?PortraitNonHabitant $portraitNonHabitant): self
+    {
+        $this->portraitNonHabitant = $portraitNonHabitant;
         return $this;
     }
 
     public function getContenu(): ?string
     {
-        return $this->Contenu;
+        return $this->contenu;
     }
 
-    public function setContenu(string $Contenu): static
+    public function setContenu(string $contenu): self
     {
-        $this->Contenu = $Contenu;
-
-        return $this;
-    }
-
-    public function getIdPortraitNonHabitant(): ?PortraitNonHabitant
-    {
-        return $this->Id_PortraitNonHabitant;
-    }
-
-    public function setIdPortraitNonHabitant(?PortraitNonHabitant $Id_PortraitNonHabitant): static
-    {
-        $this->Id_PortraitNonHabitant = $Id_PortraitNonHabitant;
-
+        $this->contenu = $contenu;
         return $this;
     }
 }

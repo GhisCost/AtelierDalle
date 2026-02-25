@@ -15,7 +15,7 @@ class MediaObjet
 
     #[ORM\ManyToOne(inversedBy: 'mediaObjets')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ObjetHabitant $Id_Objet = null;
+    private ?ObjetHabitant $objet = null;
 
     #[ORM\Column(length: 255)]
     private ?string $contenu = null;
@@ -25,15 +25,14 @@ class MediaObjet
         return $this->id;
     }
 
-    public function getIdObjet(): ?ObjetHabitant
+    public function getObjet(): ?ObjetHabitant
     {
-        return $this->Id_Objet;
+        return $this->objet;
     }
 
-    public function setIdObjet(?ObjetHabitant $Id_Objet): static
+    public function setObjet(?ObjetHabitant $objet): self
     {
-        $this->Id_Objet = $Id_Objet;
-
+        $this->objet = $objet;
         return $this;
     }
 
@@ -42,10 +41,9 @@ class MediaObjet
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): static
+    public function setContenu(string $contenu): self
     {
         $this->contenu = $contenu;
-
         return $this;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\UsersCrudController;
 use App\Entity\MediaPortrait;
 use App\Entity\PortraitHabitant;
+use App\Entity\PortraitNonHabitant;
 use App\Entity\TextePortrait;
 use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -48,6 +49,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Users', 'fas fa-list', Users::class);
         yield MenuItem::linkToCrud('Portrait Habitant', 'fas fa-list', PortraitHabitant::class);
+        yield MenuItem::linkToCrud('Portrait Non Habitant', 'fas fa-list', PortraitNonHabitant::class);
         yield MenuItem::linkToCrud('Media Portrait', 'fas fa-list', MediaPortrait::class);
         yield MenuItem::linkToCrud('Texte Portrait', 'fas fa-list', TextePortrait::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);

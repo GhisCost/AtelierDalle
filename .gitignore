@@ -19,3 +19,5 @@
 /templates/brouillon.php
 /node_modules
 ###< symfony/asset-mapper ###
+
+# /public/uploads
