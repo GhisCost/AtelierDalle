@@ -12,7 +12,7 @@ final class CoHabiterController extends AbstractController
     public function index(): Response
     {
         return $this->render('co_habiter/index.html.twig', [
-            'controller_name' => 'CoHabiterController',
+            
         ]);
     }
 }

@@ -52,6 +52,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Portrait Non Habitant', 'fas fa-list', PortraitNonHabitant::class);
         yield MenuItem::linkToCrud('Media Portrait', 'fas fa-list', MediaPortrait::class);
         yield MenuItem::linkToCrud('Texte Portrait', 'fas fa-list', TextePortrait::class);
+        yield MenuItem::section('Site');
+        yield MenuItem::linkToUrl('Retour au site', 'fa fa-globe', '/');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

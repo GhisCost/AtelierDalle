@@ -1,0 +1,182 @@
+
+
+#page-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.corps {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* couche animée */
+.page-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(255, 255, 255);
+  z-index: 50;
+  transition: transform 1s ease;
+}
+
+/* positions de départ */
+.from-left   { transform: translateX(-100%); }
+.from-right  { transform: translateX(100%); }
+.from-bottom { transform: translateY(100%); }
+
+/* position finale */
+.page-transition.show {
+  transform: translate(0, 0);
+}
+
+#canvas {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+}
+
+#cursor {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: white;         
+          /* Blanc de base */
+        position: fixed;
+        pointer-events: none;
+         mix-blend-mode: difference; 
+         /* Change la couleur automatiquement en fonction du fond  */
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        transition: width 0.2s, height 0.2s;
+         /* optionelle: animation fluide */
+    }
+
+/* Minimap */
+
+header {
+    background-color: #ffffff00;
+    width: 200px;
+    height: 200px;
+    transform-origin: top left;
+    position:absolute;
+    z-index:2000;
+    transition: transform 0.5s ease-in-out;
+}
+ 
+header:hover {
+    transform: scale(1.5);
+}
+#hiddentext{
+    position: absolute;
+}
+ 
+#hiddentext p{
+position: absolute;
+}
+#ht1{
+    left: 45px;
+    top: 20px;
+}
+#ht2{
+top: 47px;
+left: 67px;
+}
+#ht3{
+top: 103px;
+left: 145px;
+font-size: 14px;
+}
+#ht4{
+top: 160px;
+}
+#ht5{
+top: 170px;
+left: 145px;
+}
+ 
+.headerbutton{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 5;
+  cursor: pointer;
+  border: black solid 1.5px;
+}
+.headerbutton:hover{
+    box-shadow: 0px 5px 5px rgb(232, 56, 56);
+}
+.headera{
+    border-radius: 50%;
+    z-index: 5;
+}
+ 
+#a1  {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+   
+}
+#a2{
+    position: absolute;
+    top: 65px;
+    left: 55px;
+}
+ 
+#a3{
+position: absolute;
+top: 65px;
+left: 125px;
+}
+ 
+#a4{
+position: absolute;
+top: 135px;
+left: 110px;
+ 
+}
+#a5{
+position: absolute;
+top: 135px;
+left: 25px;
+ 
+}
+ 
+.span {
+  position: absolute;
+  width: 40px;
+  height: 2px;
+  background: black;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 50%;
+  z-index: 11;
+}
+#s1 { transform: rotate(45deg);
+margin-left: 13px;
+margin-top: 13px;
+width: 35px;
+}
+#s2 { transform: rotate(0deg);
+margin-left: 20px;
+width: 32px ;
+}
+#s3 { transform: rotate(0deg);
+opacity: 0;
+}
+#s4 { transform: rotate(-130deg);
+margin-top: -16px;
+margin-left: -13px;
+width: 51px;
+}
+#s5 { transform: rotate(-65deg);
+    margin-top: -20px;
+    margin-left: 5px;
+    width: 39px;
+}

@@ -16,28 +16,42 @@ class PortraitHabitantRepository extends ServiceEntityRepository
         parent::__construct($registry, PortraitHabitant::class);
     }
 
-    //    /**
-    //     * @return PortraitHabitant[] Returns an array of PortraitHabitant objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?PortraitHabitant
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findAllPortraits(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.mediaPortraits', 'm')
+            ->addSelect('m')
+            ->leftJoin('p.textePortraits', 't')
+            ->addSelect('t')
+            ->leftJoin('p.objetHabitants', 'o')
+            ->addSelect('o')
+            ->getQuery()
+            ->getResult();
+    }
 }
+
+
+//    /**
+//     * @return PortraitHabitant[] Returns an array of PortraitHabitant objects
+//     */
+//    public function findByExampleField($value): array
+//    {
+//        return $this->createQueryBuilder('p')
+//            ->andWhere('p.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->orderBy('p.id', 'ASC')
+//            ->setMaxResults(10)
+//            ->getQuery()
+//            ->getResult()
+//        ;
+//    }
+
+//    public function findOneBySomeField($value): ?PortraitHabitant
+//    {
+//        return $this->createQueryBuilder('p')
+//            ->andWhere('p.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+//    }
