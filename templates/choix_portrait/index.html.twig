@@ -3,27 +3,24 @@
 {% block title %}Habitants de la Dalle Robespierre{% endblock %}
 
 {% block body %}
- 
-<h1 class="text-center text-5xl font-bold space-y-10">
-  Les habitants de la Dalle Robespierre
-</h1>
 
-<div class="w-full flex flex-col items-center mt-[50px]">
-  {% for port in portraits %}
+<div class="corps-content flex flex-col items-center pt-40">
+  <h1 class="text-center text-5xl font-bold">
+    Les habitants de la Dalle Robespierre
+  </h1>
 
-    <div class="w-[80%] flex justify-center">
-      <img 
-        class="w-full object-cover"
-        src="{{ asset('uploads/media/' ~ port.mediaPortraits[0].contenu )}}" 
-        alt="photo de {{ port.prenom }}"
-      > 
-    </div>
-
-    <h3 class="text-xl text-center mt-4">
-      {{ port.prenom }}
-    </h3>
-    
-  {% endfor %}
+  <div class="w-full flex flex-col items-center gap-12 mt-16"> 
+    {% for port in portraits %}
+      <a href="{{path('app_portrait_habitant',{id: port.id}) }}">
+      <div class="w-1/5">
+        <img class="object-cover w-full"
+             src="{{ asset('uploads/media/' ~ port.mediaPortraits[0].contenu )}}" 
+             alt="photo de {{ port.prenom }}">
+      </div>
+      <h3 class="text-lg text-center">{{ port.prenom }}</h3> 
+      </a>
+    {% endfor %}
+  </div>
 </div>
 
 {% endblock %}
