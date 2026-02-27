@@ -4,15 +4,15 @@
 
 {% block body %}
 
-<div class="corps-content flex flex-col items-center pt-40">
+<div class="corps-content flex flex-col items-center pt-8">
   <h1 class="text-center text-5xl font-bold">
     Les habitants de la Dalle Robespierre
   </h1>
 
-  <div class="w-full flex flex-col items-center gap-12 mt-16"> 
+  <div class="w-full flex flex-col items-center gap-12 mt-40"> 
     {% for port in portraits %}
-      <a href="{{path('app_portrait_habitant',{id: port.id}) }}">
-      <div class="w-1/5">
+      <a href="{{path('app_portrait_habitant',{id: port.id}) }}" class="flex flex-col items-center">
+      <div class="w-1/4">
         <img class="object-cover w-full"
              src="{{ asset('uploads/media/' ~ port.mediaPortraits[0].contenu )}}" 
              alt="photo de {{ port.prenom }}">

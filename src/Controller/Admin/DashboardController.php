@@ -6,9 +6,11 @@ use App\Controller\Admin\UsersCrudController;
 use App\Entity\MediaPortrait;
 use App\Entity\PortraitHabitant;
 use App\Entity\PortraitNonHabitant;
+use App\Entity\TexteGastronomie;
 use App\Entity\TextePortrait;
 use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -52,8 +54,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Portrait Non Habitant', 'fas fa-list', PortraitNonHabitant::class);
         yield MenuItem::linkToCrud('Media Portrait', 'fas fa-list', MediaPortrait::class);
         yield MenuItem::linkToCrud('Texte Portrait', 'fas fa-list', TextePortrait::class);
+        yield MenuItem::linkToCrud('Texte Gastronomie', 'fas fa-list', TexteGastronomie::class);
         yield MenuItem::section('Site');
         yield MenuItem::linkToUrl('Retour au site', 'fa fa-globe', '/');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
+
+
 }

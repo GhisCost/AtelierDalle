@@ -1,89 +1,83 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Portrait{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        /* On force les tailles ici pour éviter que le CSS global écrase Tailwind */
-        .media-first {
-            width: 40% !important;
-            height: auto !important;
-            display: block;
-            margin-bottom: 1rem;
-            margin-top:100px;
-        }
-        .media-thumb {
-            width: 8rem !important;
-            height: 8rem !important;
-            object-fit: cover !important;
-            border-radius: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .media-grid {
-            display: grid !important;
-            grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr)) !important;
-            gap: 0.5rem !important;
-        }
-    </style>
+{% block title %}Portrait
 {% endblock %}
 
 {% block body %}
 
-<div class="flex flex-col items-start gap-8 p-8">
+	<h1 class="text-5xl font-bold py-8 text-center">{{ portrait.prenom }}</h1>
+	
+    <div class="flex justify-evenly">
+			<a href="" class="font-bold text-lg">
+				Objets
+			</a>
+			<a href="" class="font-bold text-lg">
+				Culture
+			</a>
+		</div>
 
-    <h1 class="text-5xl font-bold mb-4 text-center">{{ portrait.prenom }}</h1>
+	<div class="flex items-start gap-8 p-8">
 
-    <!-- Images -->
-    {% set first_image = true %}
-    {% set other_images = [] %}
-    {% for media in portrait.mediaPortraits %}
-        {% set ext = media.contenu|split('.')|last|lower %}
-        {% if ext in ['png','jpg','jpeg','webp','gif'] %}
-            {% if first_image %}
-                <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="" class="media-first rounded-lg shadow-lg">
-                {% set first_image = false %}
-            {% else %}
-                {% set other_images = other_images|merge([media.contenu]) %}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+		<div
+			class="flex flex-col items-center gap-8 p-2 w-1/2">
 
-    {% if other_images|length > 0 %}
-        <div class="media-grid">
-            {% for img in other_images %}
-                <img src="{{ asset('uploads/media/' ~ img) }}" alt="" class="media-thumb shadow-md">
-            {% endfor %}
-        </div>
-    {% endif %}
+			<!-- Images -->
+			{% set first_image = true %}
+			{% set other_images = [] %}
+			{% for media in portrait.mediaPortraits %}
+				{% set ext = media.contenu|split('.')|last|lower %}
+				{% if ext in ['png','jpg','jpeg','webp','gif'] %}
+					{% if first_image %}
+						<img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="" class="w-[60%] h-auto block mb-4 mt-[80px] shadow-lg">
+						{% set first_image = false %}
+					{% else %}
+						{% set other_images = other_images|merge([media.contenu]) %}
+					{% endif %}
+				{% endif %}
+			{% endfor %}
 
-    <!-- Vidéos -->
-    {% set first_video = true %}
-    {% set other_videos = [] %}
-    {% for media in portrait.mediaPortraits %}
-        {% set ext = media.contenu|split('.')|last|lower %}
-        {% if ext == 'mp4' %}
-            {% if first_video %}
-                <video controls class="media-first rounded-lg shadow-lg">
-                    <source src="{{ asset('uploads/media/' ~ media.contenu) }}" type="video/mp4">
-                </video>
-                {% set first_video = false %}
-            {% else %}
-                {% set other_videos = other_videos|merge([media.contenu]) %}
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+			{% if other_images|length > 0 %}
+				<div class="flex gap-6">
+					{% for img in other_images %}
+						<img src="{{ asset('uploads/media/' ~ img) }}" alt="" class="w-32 h-32 object-contain mb-2 shadow-md">
+					{% endfor %}
+				</div>
+			{% endif %}
 
-    {% if other_videos|length > 0 %}
-        <div class="media-grid">
-            {% for vid in other_videos %}
-                <video controls class="media-thumb shadow-md">
-                    <source src="{{ asset('uploads/media/' ~ vid) }}" type="video/mp4">
-                </video>
-            {% endfor %}
-        </div>
-    {% endif %}
+			<!-- Vidéos -->
+			{% set first_video = true %}
+			{% set other_videos = [] %}
+			{% for media in portrait.mediaPortraits %}
+				{% set ext = media.contenu|split('.')|last|lower %}
+				{% if ext == 'mp4' %}
+					{% if first_video %}
+						<video controls class="w-[60%] h-auto block mb-4 mt-[100px] shadow-lg">
+							<source src="{{ asset('uploads/media/' ~ media.contenu) }}" type="video/mp4">
+						</video>
+						{% set first_video = false %}
+					{% else %}
+						{% set other_videos = other_videos|merge([media.contenu]) %}
+					{% endif %}
+				{% endif %}
+			{% endfor %}
 
-</div>
+			{% if other_videos|length > 0 %}
+				<div class="flex gap-6">
+					{% for vid in other_videos %}
+						<video controls class="w-32 h-32 object-contain mb-2 shadow-md">
+							<source src="{{ asset('uploads/media/' ~ vid) }}" type="video/mp4">
+						</video>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+
+		<div class="gap-8 p-2 w-1/2 mt-[80px] mr-4">
+			{% for text in portrait.textePortraits %}
+				<p class="text-justify">{{text.contenu}}</p>
+				<br>
+			{% endfor %}
+		</div>
+	</div>
 
 {% endblock %}

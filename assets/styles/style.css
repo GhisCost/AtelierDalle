@@ -67,9 +67,10 @@ header {
     transition: transform 0.5s ease-in-out;
 }
  
-header:hover {
+/* header:hover {
     transform: scale(1.5);
-}
+} */
+ 
 #hiddentext{
     position: absolute;
 }

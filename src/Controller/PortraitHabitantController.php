@@ -14,8 +14,6 @@ final class PortraitHabitantController extends AbstractController
     {
         $portrait=$portraitHabitantRepository->find($id);
 
-     
-
         return $this->render('portrait_habitant/index.html.twig', [
            'portrait'=>$portrait,
         ]);
