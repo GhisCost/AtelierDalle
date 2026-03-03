@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaObjetRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaObjetRepository::class)]
+#[Vich\Uploadable]
 class MediaObjet
 {
     #[ORM\Id]
@@ -17,8 +20,14 @@ class MediaObjet
     #[ORM\JoinColumn(nullable: false)]
     private ?ObjetHabitant $objet = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $contenu = null;
+
+    #[Vich\UploadableField(mapping: 'media_objet', fileNameProperty: 'contenu')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -30,7 +39,7 @@ class MediaObjet
         return $this->objet;
     }
 
-    public function setObjet(?ObjetHabitant $objet): self
+    public function setObjet(?ObjetHabitant $objet): static
     {
         $this->objet = $objet;
         return $this;
@@ -41,9 +50,27 @@ class MediaObjet
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): self
+    public function setContenu(?string $contenu): void
     {
         $this->contenu = $contenu;
-        return $this;
+    }
+
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

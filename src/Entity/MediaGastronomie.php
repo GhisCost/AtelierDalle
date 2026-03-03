@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaGastronomieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaGastronomieRepository::class)]
+#[Vich\Uploadable]
 class MediaGastronomie
 {
     #[ORM\Id]
@@ -15,37 +18,60 @@ class MediaGastronomie
 
     #[ORM\ManyToOne(inversedBy: 'mediaGastronomies')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?GastronomieDalle $Id_Gastronomie = null;
+    private ?GastronomieDalle $gastronomie = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lien_source = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienSource = null;
+
+    #[Vich\UploadableField(mapping: 'media_gastronomie', fileNameProperty: 'lienSource')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdGastronomie(): ?GastronomieDalle
+    public function getGastronomie(): ?GastronomieDalle
     {
-        return $this->Id_Gastronomie;
+        return $this->gastronomie;
     }
 
-    public function setIdGastronomie(?GastronomieDalle $Id_Gastronomie): static
+    public function setGastronomie(?GastronomieDalle $gastronomie): static
     {
-        $this->Id_Gastronomie = $Id_Gastronomie;
+        $this->gastronomie = $gastronomie;
 
         return $this;
     }
 
     public function getLienSource(): ?string
     {
-        return $this->lien_source;
+        return $this->lienSource;
     }
 
-    public function setLienSource(string $lien_source): static
+    public function setLienSource(?string $lienSource): void
     {
-        $this->lien_source = $lien_source;
+        $this->lienSource = $lienSource;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

@@ -80,7 +80,7 @@ class GastronomieDalle
     {
         if (!$this->mediaGastronomies->contains($mediaGastronomy)) {
             $this->mediaGastronomies->add($mediaGastronomy);
-            $mediaGastronomy->setIdGastronomie($this);
+            $mediaGastronomy->setGastronomie($this);
         }
 
         return $this;
@@ -90,8 +90,8 @@ class GastronomieDalle
     {
         if ($this->mediaGastronomies->removeElement($mediaGastronomy)) {
             // set the owning side to null (unless already changed)
-            if ($mediaGastronomy->getIdGastronomie() === $this) {
-                $mediaGastronomy->setIdGastronomie(null);
+            if ($mediaGastronomy->getGastronomie() === $this) {
+                $mediaGastronomy->setGastronomie(null);
             }
         }
 

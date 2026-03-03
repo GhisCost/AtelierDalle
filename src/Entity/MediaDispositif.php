@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaDispositifRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaDispositifRepository::class)]
+#[Vich\Uploadable]
 class MediaDispositif
 {
     #[ORM\Id]
@@ -15,24 +18,30 @@ class MediaDispositif
 
     #[ORM\ManyToOne(inversedBy: 'mediaDispositifs')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Dispositif $Id_Dispositif = null;
+    private ?Dispositif $dispositif = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $contenu = null;
+
+    #[Vich\UploadableField(mapping: 'media_dispositif', fileNameProperty: 'contenu')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdDispositif(): ?Dispositif
+    public function getDispositif(): ?Dispositif
     {
-        return $this->Id_Dispositif;
+        return $this->dispositif;
     }
 
-    public function setIdDispositif(?Dispositif $Id_Dispositif): static
+    public function setDispositif(?Dispositif $dispositif): static
     {
-        $this->Id_Dispositif = $Id_Dispositif;
+        $this->dispositif = $dispositif;
 
         return $this;
     }
@@ -42,10 +51,27 @@ class MediaDispositif
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): static
+    public function setContenu(?string $contenu): void
     {
         $this->contenu = $contenu;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

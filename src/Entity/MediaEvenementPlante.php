@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaEvenementPlanteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaEvenementPlanteRepository::class)]
+#[Vich\Uploadable]
 class MediaEvenementPlante
 {
     #[ORM\Id]
@@ -14,37 +17,60 @@ class MediaEvenementPlante
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'mediaEvenementPlantes')]
-    private ?EvenementPlantes $Id_evenementPlantes = null;
+    private ?EvenementPlantes $evenementPlantes = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lien_source = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienSource = null;
+
+    #[Vich\UploadableField(mapping: 'media_evenement_plante', fileNameProperty: 'lienSource')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdEvenementPlantes(): ?EvenementPlantes
+    public function getEvenementPlantes(): ?EvenementPlantes
     {
-        return $this->Id_evenementPlantes;
+        return $this->evenementPlantes;
     }
 
-    public function setIdEvenementPlantes(?EvenementPlantes $Id_evenementPlantes): static
+    public function setEvenementPlantes(?EvenementPlantes $evenementPlantes): static
     {
-        $this->Id_evenementPlantes = $Id_evenementPlantes;
+        $this->evenementPlantes = $evenementPlantes;
 
         return $this;
     }
 
     public function getLienSource(): ?string
     {
-        return $this->lien_source;
+        return $this->lienSource;
     }
 
-    public function setLienSource(string $lien_source): static
+    public function setLienSource(?string $lienSource): void
     {
-        $this->lien_source = $lien_source;
+        $this->lienSource = $lienSource;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

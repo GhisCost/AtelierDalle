@@ -109,7 +109,7 @@ class CultureDuMonde
     {
         if (!$this->mediaCultures->contains($mediaCulture)) {
             $this->mediaCultures->add($mediaCulture);
-            $mediaCulture->setIdCultureMonde($this);
+            $mediaCulture->setCultureMonde($this);
         }
 
         return $this;
@@ -119,8 +119,8 @@ class CultureDuMonde
     {
         if ($this->mediaCultures->removeElement($mediaCulture)) {
             // set the owning side to null (unless already changed)
-            if ($mediaCulture->getIdCultureMonde() === $this) {
-                $mediaCulture->setIdCultureMonde(null);
+            if ($mediaCulture->getCultureMonde() === $this) {
+                $mediaCulture->setCultureMonde(null);
             }
         }
 

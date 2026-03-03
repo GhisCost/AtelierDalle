@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaAppartementRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaAppartementRepository::class)]
+#[Vich\Uploadable]
 class MediaAppartement
 {
     #[ORM\Id]
@@ -15,24 +18,30 @@ class MediaAppartement
 
     #[ORM\ManyToOne(inversedBy: 'mediaAppartements')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Appartement $Id_Appartement = null;
+    private ?Appartement $appartement = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $contenu = null;
+
+    #[Vich\UploadableField(mapping: 'media_appartement', fileNameProperty: 'contenu')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdAppartement(): ?Appartement
+    public function getAppartement(): ?Appartement
     {
-        return $this->Id_Appartement;
+        return $this->appartement;
     }
 
-    public function setIdAppartement(?Appartement $Id_Appartement): static
+    public function setAppartement(?Appartement $appartement): static
     {
-        $this->Id_Appartement = $Id_Appartement;
+        $this->appartement = $appartement;
 
         return $this;
     }
@@ -42,10 +51,27 @@ class MediaAppartement
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): static
+    public function setContenu(?string $contenu): void
     {
         $this->contenu = $contenu;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

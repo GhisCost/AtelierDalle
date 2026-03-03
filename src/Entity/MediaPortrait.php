@@ -16,23 +16,18 @@ class MediaPortrait
     #[ORM\Column]
     private ?int $id = null;
 
-    // Association avec PortraitHabitant
     #[ORM\ManyToOne(inversedBy: 'mediaPortraits')]
     private ?PortraitHabitant $portraitHabitant = null;
 
-    // Association avec PortraitNonHabitant
     #[ORM\ManyToOne(inversedBy: 'mediaPortraits')]
     private ?PortraitNonHabitant $portraitNonHabitant = null;
 
-    // Nom du fichier stocké en base
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $contenu = null;
 
-    // Champ de type File pour le formulaire upload
     #[Vich\UploadableField(mapping: 'media_portrait', fileNameProperty: 'contenu')]
     private ?File $file = null;
 
-    // Champ pour forcer Doctrine à détecter la modification
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 

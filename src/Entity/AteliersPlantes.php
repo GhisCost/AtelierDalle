@@ -81,7 +81,7 @@ class AteliersPlantes
     {
         if (!$this->mediaAteliers->contains($mediaAtelier)) {
             $this->mediaAteliers->add($mediaAtelier);
-            $mediaAtelier->setIdAtelier($this);
+            $mediaAtelier->setAtelier($this);
         }
 
         return $this;
@@ -91,8 +91,8 @@ class AteliersPlantes
     {
         if ($this->mediaAteliers->removeElement($mediaAtelier)) {
             // set the owning side to null (unless already changed)
-            if ($mediaAtelier->getIdAtelier() === $this) {
-                $mediaAtelier->setIdAtelier(null);
+            if ($mediaAtelier->getAtelier() === $this) {
+                $mediaAtelier->setAtelier(null);
             }
         }
 

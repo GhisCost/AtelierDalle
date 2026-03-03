@@ -88,7 +88,7 @@ class Appartement
     {
         if (!$this->mediaAppartements->contains($mediaAppartement)) {
             $this->mediaAppartements->add($mediaAppartement);
-            $mediaAppartement->setIdAppartement($this);
+            $mediaAppartement->setAppartement($this);
         }
 
         return $this;
@@ -98,8 +98,8 @@ class Appartement
     {
         if ($this->mediaAppartements->removeElement($mediaAppartement)) {
             // set the owning side to null (unless already changed)
-            if ($mediaAppartement->getIdAppartement() === $this) {
-                $mediaAppartement->setIdAppartement(null);
+            if ($mediaAppartement->getAppartement() === $this) {
+                $mediaAppartement->setAppartement(null);
             }
         }
 

@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaAtelierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaAtelierRepository::class)]
+#[Vich\Uploadable]
 class MediaAtelier
 {
     #[ORM\Id]
@@ -15,37 +18,60 @@ class MediaAtelier
 
     #[ORM\ManyToOne(inversedBy: 'mediaAteliers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?AteliersPlantes $Id_Atelier = null;
+    private ?AteliersPlantes $atelier = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lien_source = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienSource = null;
+
+    #[Vich\UploadableField(mapping: 'media_atelier', fileNameProperty: 'lienSource')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdAtelier(): ?AteliersPlantes
+    public function getAtelier(): ?AteliersPlantes
     {
-        return $this->Id_Atelier;
+        return $this->atelier;
     }
 
-    public function setIdAtelier(?AteliersPlantes $Id_Atelier): static
+    public function setAtelier(?AteliersPlantes $atelier): static
     {
-        $this->Id_Atelier = $Id_Atelier;
+        $this->atelier = $atelier;
 
         return $this;
     }
 
     public function getLienSource(): ?string
     {
-        return $this->lien_source;
+        return $this->lienSource;
     }
 
-    public function setLienSource(string $lien_source): static
+    public function setLienSource(?string $lienSource): void
     {
-        $this->lien_source = $lien_source;
+        $this->lienSource = $lienSource;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

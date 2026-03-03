@@ -96,7 +96,7 @@ class EvenementPlantes
     {
         if (!$this->mediaEvenementPlantes->contains($mediaEvenementPlante)) {
             $this->mediaEvenementPlantes->add($mediaEvenementPlante);
-            $mediaEvenementPlante->setIdEvenementPlantes($this);
+            $mediaEvenementPlante->setEvenementPlantes($this);
         }
 
         return $this;
@@ -106,8 +106,8 @@ class EvenementPlantes
     {
         if ($this->mediaEvenementPlantes->removeElement($mediaEvenementPlante)) {
             // set the owning side to null (unless already changed)
-            if ($mediaEvenementPlante->getIdEvenementPlantes() === $this) {
-                $mediaEvenementPlante->setIdEvenementPlantes(null);
+            if ($mediaEvenementPlante->getEvenementPlantes() === $this) {
+                $mediaEvenementPlante->setEvenementPlantes(null);
             }
         }
 

@@ -74,7 +74,7 @@ class Echafaudages
     {
         if (!$this->mediaEchafaudages->contains($mediaEchafaudage)) {
             $this->mediaEchafaudages->add($mediaEchafaudage);
-            $mediaEchafaudage->setIdEchafaudage($this);
+            $mediaEchafaudage->setEchafaudage($this);
         }
 
         return $this;
@@ -84,8 +84,8 @@ class Echafaudages
     {
         if ($this->mediaEchafaudages->removeElement($mediaEchafaudage)) {
             // set the owning side to null (unless already changed)
-            if ($mediaEchafaudage->getIdEchafaudage() === $this) {
-                $mediaEchafaudage->setIdEchafaudage(null);
+            if ($mediaEchafaudage->getEchafaudage() === $this) {
+                $mediaEchafaudage->setEchafaudage(null);
             }
         }
 

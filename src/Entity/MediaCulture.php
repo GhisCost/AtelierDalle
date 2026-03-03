@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaCultureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaCultureRepository::class)]
+#[Vich\Uploadable]
 class MediaCulture
 {
     #[ORM\Id]
@@ -14,52 +17,75 @@ class MediaCulture
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'mediaCultures')]
-    private ?CultureDuMonde $Id_CultureMonde = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $lien_source = null;
+    private ?CultureDuMonde $cultureMonde = null;
 
     #[ORM\ManyToOne(inversedBy: 'mediaCultures')]
-    private ?CultureUrbaine $Id_CultureUrbaine = null;
+    private ?CultureUrbaine $cultureUrbaine = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienSource = null;
+
+    #[Vich\UploadableField(mapping: 'media_culture', fileNameProperty: 'lienSource')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdCultureMonde(): ?CultureDuMonde
+    public function getCultureMonde(): ?CultureDuMonde
     {
-        return $this->Id_CultureMonde;
+        return $this->cultureMonde;
     }
 
-    public function setIdCultureMonde(?CultureDuMonde $Id_CultureMonde): static
+    public function setCultureMonde(?CultureDuMonde $cultureMonde): static
     {
-        $this->Id_CultureMonde = $Id_CultureMonde;
+        $this->cultureMonde = $cultureMonde;
+
+        return $this;
+    }
+
+    public function getCultureUrbaine(): ?CultureUrbaine
+    {
+        return $this->cultureUrbaine;
+    }
+
+    public function setCultureUrbaine(?CultureUrbaine $cultureUrbaine): static
+    {
+        $this->cultureUrbaine = $cultureUrbaine;
 
         return $this;
     }
 
     public function getLienSource(): ?string
     {
-        return $this->lien_source;
+        return $this->lienSource;
     }
 
-    public function setLienSource(string $lien_source): static
+    public function setLienSource(?string $lienSource): void
     {
-        $this->lien_source = $lien_source;
-
-        return $this;
+        $this->lienSource = $lienSource;
     }
 
-    public function getIdCultureUrbaine(): ?CultureUrbaine
+    public function setFile(?File $file = null): void
     {
-        return $this->Id_CultureUrbaine;
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
-    public function setIdCultureUrbaine(?CultureUrbaine $Id_CultureUrbaine): static
+    public function getFile(): ?File
     {
-        $this->Id_CultureUrbaine = $Id_CultureUrbaine;
+        return $this->file;
+    }
 
-        return $this;
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

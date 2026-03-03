@@ -74,7 +74,7 @@ class BruitChantier
     {
         if (!$this->mediaBruitChantiers->contains($mediaBruitChantier)) {
             $this->mediaBruitChantiers->add($mediaBruitChantier);
-            $mediaBruitChantier->setIdBruitChantier($this);
+            $mediaBruitChantier->setBruitChantier($this);
         }
 
         return $this;
@@ -84,8 +84,8 @@ class BruitChantier
     {
         if ($this->mediaBruitChantiers->removeElement($mediaBruitChantier)) {
             // set the owning side to null (unless already changed)
-            if ($mediaBruitChantier->getIdBruitChantier() === $this) {
-                $mediaBruitChantier->setIdBruitChantier(null);
+            if ($mediaBruitChantier->getBruitChantier() === $this) {
+                $mediaBruitChantier->setBruitChantier(null);
             }
         }
 

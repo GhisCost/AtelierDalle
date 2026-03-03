@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaObjetCultureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaObjetCultureRepository::class)]
+#[Vich\Uploadable]
 class MediaObjetCulture
 {
     #[ORM\Id]
@@ -15,24 +18,30 @@ class MediaObjetCulture
 
     #[ORM\ManyToOne(inversedBy: 'mediaObjetCultures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ObjetCulture $Id_ObjetCulture = null;
+    private ?ObjetCulture $objetculture = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lienSource = null;
+
+    #[Vich\UploadableField(mapping: 'media_objet_culture', fileNameProperty: 'lienSource')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdObjetCulture(): ?ObjetCulture
+    public function getObjetculture(): ?ObjetCulture
     {
-        return $this->Id_ObjetCulture;
+        return $this->objetculture;
     }
 
-    public function setIdObjetCulture(?ObjetCulture $Id_ObjetCulture): static
+    public function setObjetculture(?ObjetCulture $objetculture): static
     {
-        $this->Id_ObjetCulture = $Id_ObjetCulture;
+        $this->objetculture = $objetculture;
 
         return $this;
     }
@@ -42,10 +51,27 @@ class MediaObjetCulture
         return $this->lienSource;
     }
 
-    public function setLienSource(string $lienSource): static
+    public function setLienSource(?string $lienSource): void
     {
         $this->lienSource = $lienSource;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\MediaEchafaudagesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MediaEchafaudagesRepository::class)]
+#[Vich\Uploadable]
 class MediaEchafaudages
 {
     #[ORM\Id]
@@ -15,24 +18,30 @@ class MediaEchafaudages
 
     #[ORM\ManyToOne(inversedBy: 'mediaEchafaudages')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Echafaudages $Id_Echafaudage = null;
+    private ?Echafaudages $echafaudage = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lienSource = null;
+
+    #[Vich\UploadableField(mapping: 'media_echafaudage', fileNameProperty: 'lienSource')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdEchafaudage(): ?Echafaudages
+    public function getEchafaudage(): ?Echafaudages
     {
-        return $this->Id_Echafaudage;
+        return $this->echafaudage;
     }
 
-    public function setIdEchafaudage(?Echafaudages $Id_Echafaudage): static
+    public function setEchafaudage(?Echafaudages $echafaudage): static
     {
-        $this->Id_Echafaudage = $Id_Echafaudage;
+        $this->echafaudage = $echafaudage;
 
         return $this;
     }
@@ -42,10 +51,27 @@ class MediaEchafaudages
         return $this->lienSource;
     }
 
-    public function setLienSource(string $lienSource): static
+    public function setLienSource(?string $lienSource): void
     {
         $this->lienSource = $lienSource;
+    }
 
-        return $this;
+    public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

@@ -74,7 +74,7 @@ class Barrieres
     {
         if (!$this->mediaBarrieres->contains($mediaBarriere)) {
             $this->mediaBarrieres->add($mediaBarriere);
-            $mediaBarriere->setIdBarrieres($this);
+            $mediaBarriere->setBarrieres($this);
         }
 
         return $this;
@@ -84,8 +84,8 @@ class Barrieres
     {
         if ($this->mediaBarrieres->removeElement($mediaBarriere)) {
             // set the owning side to null (unless already changed)
-            if ($mediaBarriere->getIdBarrieres() === $this) {
-                $mediaBarriere->setIdBarrieres(null);
+            if ($mediaBarriere->getBarrieres() === $this) {
+                $mediaBarriere->setBarrieres(null);
             }
         }
 

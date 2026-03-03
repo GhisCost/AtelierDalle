@@ -88,7 +88,7 @@ class CultureUrbaine
     {
         if (!$this->mediaCultures->contains($mediaCulture)) {
             $this->mediaCultures->add($mediaCulture);
-            $mediaCulture->setIdCultureUrbaine($this);
+            $mediaCulture->setCultureUrbaine($this);
         }
 
         return $this;
@@ -98,8 +98,8 @@ class CultureUrbaine
     {
         if ($this->mediaCultures->removeElement($mediaCulture)) {
             // set the owning side to null (unless already changed)
-            if ($mediaCulture->getIdCultureUrbaine() === $this) {
-                $mediaCulture->setIdCultureUrbaine(null);
+            if ($mediaCulture->getCultureUrbaine() === $this) {
+                $mediaCulture->setCultureUrbaine(null);
             }
         }
 

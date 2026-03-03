@@ -65,7 +65,7 @@ class Dispositif
     {
         if (!$this->mediaDispositifs->contains($mediaDispositif)) {
             $this->mediaDispositifs->add($mediaDispositif);
-            $mediaDispositif->setIdDispositif($this);
+            $mediaDispositif->setDispositif($this);
         }
 
         return $this;
@@ -75,8 +75,8 @@ class Dispositif
     {
         if ($this->mediaDispositifs->removeElement($mediaDispositif)) {
             // set the owning side to null (unless already changed)
-            if ($mediaDispositif->getIdDispositif() === $this) {
-                $mediaDispositif->setIdDispositif(null);
+            if ($mediaDispositif->getDispositif() === $this) {
+                $mediaDispositif->setDispositif(null);
             }
         }
 

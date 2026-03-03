@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\UsersCrudController;
+use App\Entity\CultureDuMonde;
+use App\Entity\EvenementCulture;
 use App\Entity\MediaPortrait;
 use App\Entity\PortraitHabitant;
 use App\Entity\PortraitNonHabitant;
@@ -55,6 +57,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Media Portrait', 'fas fa-list', MediaPortrait::class);
         yield MenuItem::linkToCrud('Texte Portrait', 'fas fa-list', TextePortrait::class);
         yield MenuItem::linkToCrud('Texte Gastronomie', 'fas fa-list', TexteGastronomie::class);
+        yield MenuItem::linkToCrud('Culture du Monde', 'fas fa-list', CultureDuMonde::class);
+        yield MenuItem::linkToCrud('Evenement Culture', 'fas fa-list', EvenementCulture::class);
         yield MenuItem::section('Site');
         yield MenuItem::linkToUrl('Retour au site', 'fa fa-globe', '/');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
