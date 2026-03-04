@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EvenementCultureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,17 @@ class EvenementCulture
 
     #[ORM\ManyToOne(inversedBy: 'evenementCultures')]
     private ?CultureUrbaine $Id_CultureUrbaine = null;
+
+    /**
+     * @var Collection<int, TexteEvenementCulture>
+     */
+    #[ORM\OneToMany(targetEntity: TexteEvenementCulture::class, mappedBy: 'evenementCulture')]
+    private Collection $texteEvenementCultures;
+
+    public function __construct()
+    {
+        $this->texteEvenementCultures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +103,36 @@ class EvenementCulture
     public function setIdCultureUrbaine(?CultureUrbaine $Id_CultureUrbaine): static
     {
         $this->Id_CultureUrbaine = $Id_CultureUrbaine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TexteEvenementCulture>
+     */
+    public function getTexteEvenementCultures(): Collection
+    {
+        return $this->texteEvenementCultures;
+    }
+
+    public function addTexteEvenementCulture(TexteEvenementCulture $texteEvenementCulture): static
+    {
+        if (!$this->texteEvenementCultures->contains($texteEvenementCulture)) {
+            $this->texteEvenementCultures->add($texteEvenementCulture);
+            $texteEvenementCulture->setEvenementCulture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTexteEvenementCulture(TexteEvenementCulture $texteEvenementCulture): static
+    {
+        if ($this->texteEvenementCultures->removeElement($texteEvenementCulture)) {
+            // set the owning side to null (unless already changed)
+            if ($texteEvenementCulture->getEvenementCulture() === $this) {
+                $texteEvenementCulture->setEvenementCulture(null);
+            }
+        }
 
         return $this;
     }

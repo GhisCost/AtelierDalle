@@ -1,5 +1,6 @@
 let x = 0, y = 0;
 
+
 function initCursor() {
     const cursor = document.getElementById('cursor');
     if (!cursor) return;
