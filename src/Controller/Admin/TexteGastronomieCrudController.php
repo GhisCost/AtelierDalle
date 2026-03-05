@@ -21,7 +21,7 @@ class TexteGastronomieCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            AssociationField::new('id_gastronomie_id'),
+            AssociationField::new('Gastronomie'),
             TextareaField::new('contenu'),
         ];
     }

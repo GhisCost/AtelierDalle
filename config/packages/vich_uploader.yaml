@@ -5,3 +5,56 @@ vich_uploader:
             uri_prefix: /uploads/media
             upload_destination: '%kernel.project_dir%/public/uploads/media'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_evenement_culture:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_appartement:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_atelier:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_autre:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_barrieres:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_bruit_chantier:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_culture:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_dispositif:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_echafaudage:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_evenement_plante:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_gastronomie:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_objet:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        media_objet_culture:
+            uri_prefix: /uploads/media
+            upload_destination: '%kernel.project_dir%/public/uploads/media'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        
