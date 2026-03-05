@@ -21,7 +21,8 @@ class GastronomieDalleCrudController extends AbstractCrudController
     {
         return [
             TextField::new('Nom'),
-            AssociationField::new('Culture du monde'),
+            AssociationField::new('CultureMonde')
+                ->setLabel('Culture du Monde'),
         ];
     }
     

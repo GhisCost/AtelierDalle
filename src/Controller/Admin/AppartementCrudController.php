@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Appartement;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -15,14 +14,13 @@ class AppartementCrudController extends AbstractCrudController
         return Appartement::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+        return [ 
+            TextField::new('batiment'),
+            TextField::new('etage'),
+            TextField::new('escalier'),
+            
         ];
-    }
-    */
+    }    
 }

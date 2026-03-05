@@ -18,7 +18,7 @@ class MediaObjetCulture
 
     #[ORM\ManyToOne(inversedBy: 'mediaObjetCultures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ObjetCulture $objetculture = null;
+    private ?ObjetCulture $objetCulture = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lienSource = null;
@@ -34,15 +34,14 @@ class MediaObjetCulture
         return $this->id;
     }
 
-    public function getObjetculture(): ?ObjetCulture
+    public function getObjetCulture(): ?ObjetCulture
     {
-        return $this->objetculture;
+        return $this->objetCulture;
     }
 
-    public function setObjetculture(?ObjetCulture $objetculture): static
+    public function setObjetCulture(?ObjetCulture $objetCulture): static
     {
-        $this->objetculture = $objetculture;
-
+        $this->objetCulture = $objetCulture;
         return $this;
     }
 

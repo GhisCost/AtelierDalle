@@ -26,6 +26,9 @@ class ObjetHabitant
     #[ORM\OneToMany(mappedBy: 'objet', targetEntity: MediaObjet::class)]
     private Collection $mediaObjets;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
     public function __construct()
     {
         $this->mediaObjets = new ArrayCollection();
@@ -83,6 +86,18 @@ class ObjetHabitant
                 $mediaObjet->setObjet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }
