@@ -21,13 +21,13 @@ class Dispositif
     /**
      * @var Collection<int, MediaDispositif>
      */
-    #[ORM\OneToMany(targetEntity: MediaDispositif::class, mappedBy: 'Id_Dispositif', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: MediaDispositif::class, mappedBy: 'Dispositif', orphanRemoval: true)]
     private Collection $mediaDispositifs;
 
     /**
      * @var Collection<int, DescriptionDispositif>
      */
-    #[ORM\OneToMany(targetEntity: DescriptionDispositif::class, mappedBy: 'Id_Dispositif')]
+    #[ORM\OneToMany(targetEntity: DescriptionDispositif::class, mappedBy: 'Dispositif')]
     private Collection $descriptionDispositifs;
 
     public function __construct()
@@ -95,7 +95,7 @@ class Dispositif
     {
         if (!$this->descriptionDispositifs->contains($descriptionDispositif)) {
             $this->descriptionDispositifs->add($descriptionDispositif);
-            $descriptionDispositif->setIdDispositif($this);
+            $descriptionDispositif->setDispositif($this);
         }
 
         return $this;
@@ -105,8 +105,8 @@ class Dispositif
     {
         if ($this->descriptionDispositifs->removeElement($descriptionDispositif)) {
             // set the owning side to null (unless already changed)
-            if ($descriptionDispositif->getIdDispositif() === $this) {
-                $descriptionDispositif->setIdDispositif(null);
+            if ($descriptionDispositif->getDispositif() === $this) {
+                $descriptionDispositif->setDispositif(null);
             }
         }
 

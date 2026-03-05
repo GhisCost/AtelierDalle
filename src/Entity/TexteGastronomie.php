@@ -16,7 +16,7 @@ class TexteGastronomie
 
     #[ORM\ManyToOne(inversedBy: 'contenu')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?GastronomieDalle $Id_Gastronomie = null;
+    private ?GastronomieDalle $Gastronomie = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
@@ -26,14 +26,14 @@ class TexteGastronomie
         return $this->id;
     }
 
-    public function getIdGastronomie(): ?GastronomieDalle
+    public function getGastronomie(): ?GastronomieDalle
     {
-        return $this->Id_Gastronomie;
+        return $this->Gastronomie;
     }
 
-    public function setIdGastronomie(?GastronomieDalle $Id_Gastronomie): static
+    public function setGastronomie(?GastronomieDalle $Gastronomie): static
     {
-        $this->Id_Gastronomie = $Id_Gastronomie;
+        $this->Gastronomie = $Gastronomie;
 
         return $this;
     }

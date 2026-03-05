@@ -25,7 +25,7 @@ class Barrieres
     /**
      * @var Collection<int, MediaBarrieres>
      */
-    #[ORM\OneToMany(targetEntity: MediaBarrieres::class, mappedBy: 'Id_Barrieres')]
+    #[ORM\OneToMany(targetEntity: MediaBarrieres::class, mappedBy: 'Barrieres')]
     private Collection $mediaBarrieres;
 
     public function __construct()

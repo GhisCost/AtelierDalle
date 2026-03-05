@@ -25,7 +25,7 @@ class Echafaudages
     /**
      * @var Collection<int, MediaEchafaudages>
      */
-    #[ORM\OneToMany(targetEntity: MediaEchafaudages::class, mappedBy: 'Id_Echafaudage')]
+    #[ORM\OneToMany(targetEntity: MediaEchafaudages::class, mappedBy: 'Echafaudage')]
     private Collection $mediaEchafaudages;
 
     public function __construct()

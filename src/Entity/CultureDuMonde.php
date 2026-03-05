@@ -25,37 +25,37 @@ class CultureDuMonde
     /**
      * @var Collection<int, MediaCulture>
      */
-    #[ORM\OneToMany(targetEntity: MediaCulture::class, mappedBy: 'Id_CultureMonde')]
+    #[ORM\OneToMany(targetEntity: MediaCulture::class, mappedBy: 'CultureMonde')]
     private Collection $mediaCultures;
 
     /**
      * @var Collection<int, EvenementCulture>
      */
-    #[ORM\OneToMany(targetEntity: EvenementCulture::class, mappedBy: 'Id_CultureMonde')]
+    #[ORM\OneToMany(targetEntity: EvenementCulture::class, mappedBy: 'CultureMonde')]
     private Collection $evenementCultures;
 
     /**
      * @var Collection<int, TexteCulture>
      */
-    #[ORM\OneToMany(targetEntity: TexteCulture::class, mappedBy: 'Id_CultureMonde')]
+    #[ORM\OneToMany(targetEntity: TexteCulture::class, mappedBy: 'CultureMonde')]
     private Collection $texteCultures;
 
     /**
      * @var Collection<int, GastronomieDalle>
      */
-    #[ORM\OneToMany(targetEntity: GastronomieDalle::class, mappedBy: 'Id_CultureMonde')]
+    #[ORM\OneToMany(targetEntity: GastronomieDalle::class, mappedBy: 'CultureMonde')]
     private Collection $gastronomieDalles;
 
     /**
      * @var Collection<int, ObjetCulture>
      */
-    #[ORM\OneToMany(targetEntity: ObjetCulture::class, mappedBy: 'Id_Culture')]
+    #[ORM\OneToMany(targetEntity: ObjetCulture::class, mappedBy: 'Culture')]
     private Collection $objetCultures;
 
     /**
      * @var Collection<int, SymboleCulture>
      */
-    #[ORM\OneToMany(targetEntity: SymboleCulture::class, mappedBy: 'Id_Culture')]
+    #[ORM\OneToMany(targetEntity: SymboleCulture::class, mappedBy: 'Culture')]
     private Collection $symboleCultures;
 
     public function __construct()
@@ -139,7 +139,7 @@ class CultureDuMonde
     {
         if (!$this->evenementCultures->contains($evenementCulture)) {
             $this->evenementCultures->add($evenementCulture);
-            $evenementCulture->setIdCultureMonde($this);
+            $evenementCulture->setCultureMonde($this);
         }
 
         return $this;
@@ -149,8 +149,8 @@ class CultureDuMonde
     {
         if ($this->evenementCultures->removeElement($evenementCulture)) {
             // set the owning side to null (unless already changed)
-            if ($evenementCulture->getIdCultureMonde() === $this) {
-                $evenementCulture->setIdCultureMonde(null);
+            if ($evenementCulture->getCultureMonde() === $this) {
+                $evenementCulture->setCultureMonde(null);
             }
         }
 
@@ -169,7 +169,7 @@ class CultureDuMonde
     {
         if (!$this->texteCultures->contains($texteCulture)) {
             $this->texteCultures->add($texteCulture);
-            $texteCulture->setIdCultureMonde($this);
+            $texteCulture->setCultureMonde($this);
         }
 
         return $this;
@@ -179,8 +179,8 @@ class CultureDuMonde
     {
         if ($this->texteCultures->removeElement($texteCulture)) {
             // set the owning side to null (unless already changed)
-            if ($texteCulture->getIdCultureMonde() === $this) {
-                $texteCulture->setIdCultureMonde(null);
+            if ($texteCulture->getCultureMonde() === $this) {
+                $texteCulture->setCultureMonde(null);
             }
         }
 
@@ -199,7 +199,7 @@ class CultureDuMonde
     {
         if (!$this->gastronomieDalles->contains($gastronomieDalle)) {
             $this->gastronomieDalles->add($gastronomieDalle);
-            $gastronomieDalle->setIdCultureMonde($this);
+            $gastronomieDalle->setCultureMonde($this);
         }
 
         return $this;
@@ -209,8 +209,8 @@ class CultureDuMonde
     {
         if ($this->gastronomieDalles->removeElement($gastronomieDalle)) {
             // set the owning side to null (unless already changed)
-            if ($gastronomieDalle->getIdCultureMonde() === $this) {
-                $gastronomieDalle->setIdCultureMonde(null);
+            if ($gastronomieDalle->getCultureMonde() === $this) {
+                $gastronomieDalle->setCultureMonde(null);
             }
         }
 
@@ -229,7 +229,7 @@ class CultureDuMonde
     {
         if (!$this->objetCultures->contains($objetCulture)) {
             $this->objetCultures->add($objetCulture);
-            $objetCulture->setIdCulture($this);
+            $objetCulture->setCulture($this);
         }
 
         return $this;
@@ -239,8 +239,8 @@ class CultureDuMonde
     {
         if ($this->objetCultures->removeElement($objetCulture)) {
             // set the owning side to null (unless already changed)
-            if ($objetCulture->getIdCulture() === $this) {
-                $objetCulture->setIdCulture(null);
+            if ($objetCulture->getCulture() === $this) {
+                $objetCulture->setCulture(null);
             }
         }
 
@@ -259,7 +259,7 @@ class CultureDuMonde
     {
         if (!$this->symboleCultures->contains($symboleCulture)) {
             $this->symboleCultures->add($symboleCulture);
-            $symboleCulture->setIdCulture($this);
+            $symboleCulture->setCulture($this);
         }
 
         return $this;
@@ -269,8 +269,8 @@ class CultureDuMonde
     {
         if ($this->symboleCultures->removeElement($symboleCulture)) {
             // set the owning side to null (unless already changed)
-            if ($symboleCulture->getIdCulture() === $this) {
-                $symboleCulture->setIdCulture(null);
+            if ($symboleCulture->getCulture() === $this) {
+                $symboleCulture->setCulture(null);
             }
         }
 

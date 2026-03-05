@@ -18,7 +18,7 @@ class DescriptionDispositif
 
     #[ORM\ManyToOne(inversedBy: 'descriptionDispositifs')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Dispositif $Id_Dispositif = null;
+    private ?Dispositif $Dispositif = null;
 
     #[ORM\Column(length: 255)]
     private ?string $contenu = null;
@@ -40,14 +40,14 @@ class DescriptionDispositif
         return $this;
     }
 
-    public function getIdDispositif(): ?Dispositif
+    public function getDispositif(): ?Dispositif
     {
-        return $this->Id_Dispositif;
+        return $this->Dispositif;
     }
 
-    public function setIdDispositif(?Dispositif $Id_Dispositif): static
+    public function setDispositif(?Dispositif $Dispositif): static
     {
-        $this->Id_Dispositif = $Id_Dispositif;
+        $this->Dispositif = $Dispositif;
 
         return $this;
     }

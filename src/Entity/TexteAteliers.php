@@ -16,7 +16,7 @@ class TexteAteliers
 
     #[ORM\ManyToOne(inversedBy: 'texteAteliers')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?AteliersPlantes $id_Atelier = null;
+    private ?AteliersPlantes $Atelier = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
@@ -26,14 +26,14 @@ class TexteAteliers
         return $this->id;
     }
 
-    public function getIdAtelier(): ?AteliersPlantes
+    public function getAtelier(): ?AteliersPlantes
     {
-        return $this->id_Atelier;
+        return $this->Atelier;
     }
 
-    public function setIdAtelier(?AteliersPlantes $id_Atelier): static
+    public function setAtelier(?AteliersPlantes $Atelier): static
     {
-        $this->id_Atelier = $id_Atelier;
+        $this->Atelier = $Atelier;
 
         return $this;
     }

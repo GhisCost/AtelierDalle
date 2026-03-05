@@ -16,7 +16,7 @@ class TexteEvenementPlantes
 
     #[ORM\ManyToOne(inversedBy: 'texteEvenementPlantes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?EvenementPlantes $Id_EvenementPlantes = null;
+    private ?EvenementPlantes $EvenementPlantes = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
@@ -26,14 +26,14 @@ class TexteEvenementPlantes
         return $this->id;
     }
 
-    public function getIdEvenementPlantes(): ?EvenementPlantes
+    public function getEvenementPlantes(): ?EvenementPlantes
     {
-        return $this->Id_EvenementPlantes;
+        return $this->EvenementPlantes;
     }
 
-    public function setIdEvenementPlantes(?EvenementPlantes $Id_EvenementPlantes): static
+    public function setEvenementPlantes(?EvenementPlantes $EvenementPlantes): static
     {
-        $this->Id_EvenementPlantes = $Id_EvenementPlantes;
+        $this->EvenementPlantes = $EvenementPlantes;
 
         return $this;
     }

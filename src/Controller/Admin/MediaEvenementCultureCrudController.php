@@ -2,28 +2,29 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\MediaGastronomie;
+use App\Entity\MediaEvenementCulture;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class MediaGastronomieCrudController extends AbstractCrudController
+class MediaEvenementCultureCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return MediaGastronomie::class;
+        return MediaEvenementCulture::class;
     }
 
     
     public function configureFields(string $pageName): iterable
     {
-       return[
-
+   return [
         // Affiche le nom du fichier uniquement dans la liste
         TextField::new('contenu', 'Fichier')
-            ->onlyOnIndex(),
+            ->onlyOnIndex(), 
 
         // Champ d'upload pour le formulaire (new/edit)
         Field::new('file')
@@ -32,10 +33,12 @@ class MediaGastronomieCrudController extends AbstractCrudController
             ->setFormTypeOption('required', false)
             ->onlyOnForms(),
 
-        AssociationField::new('gastronomie')
-            ->setLabel('Gastronomie de la Dalle'),
+        AssociationField::new('evenementCulture')
+            ->setLabel('Evenement Culture'),
 
+    
     ];
+
     }
     
 }

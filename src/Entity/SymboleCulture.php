@@ -19,7 +19,7 @@ class SymboleCulture
 
     #[ORM\ManyToOne(inversedBy: 'symboleCultures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?CultureDuMonde $Id_Culture = null;
+    private ?CultureDuMonde $Culture = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
@@ -44,14 +44,14 @@ class SymboleCulture
         return $this;
     }
 
-    public function getIdCulture(): ?CultureDuMonde
+    public function getCulture(): ?CultureDuMonde
     {
-        return $this->Id_Culture;
+        return $this->Culture;
     }
 
-    public function setIdCulture(?CultureDuMonde $Id_Culture): static
+    public function setCulture(?CultureDuMonde $Culture): static
     {
-        $this->Id_Culture = $Id_Culture;
+        $this->Culture = $Culture;
 
         return $this;
     }

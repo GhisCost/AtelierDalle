@@ -24,12 +24,12 @@ class ObjetCulture
 
     #[ORM\ManyToOne(inversedBy: 'objetCultures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?CultureDuMonde $Id_Culture = null;
+    private ?CultureDuMonde $Culture = null;
 
     /**
      * @var Collection<int, MediaObjetCulture>
      */
-    #[ORM\OneToMany(targetEntity: MediaObjetCulture::class, mappedBy: 'Id_ObjetCulture')]
+    #[ORM\OneToMany(targetEntity: MediaObjetCulture::class, mappedBy: 'objetCulture')]
     private Collection $mediaObjetCultures;
 
     public function __construct()
@@ -66,14 +66,14 @@ class ObjetCulture
         return $this;
     }
 
-    public function getIdCulture(): ?CultureDuMonde
+    public function getCulture(): ?CultureDuMonde
     {
-        return $this->Id_Culture;
+        return $this->Culture;
     }
 
-    public function setIdCulture(?CultureDuMonde $Id_Culture): static
+    public function setCulture(?CultureDuMonde $Culture): static
     {
-        $this->Id_Culture = $Id_Culture;
+        $this->Culture = $Culture;
 
         return $this;
     }
@@ -90,7 +90,7 @@ class ObjetCulture
     {
         if (!$this->mediaObjetCultures->contains($mediaObjetCulture)) {
             $this->mediaObjetCultures->add($mediaObjetCulture);
-            $mediaObjetCulture->setIdObjetCulture($this);
+            $mediaObjetCulture->setObjetCulture($this);
         }
 
         return $this;
@@ -100,8 +100,8 @@ class ObjetCulture
     {
         if ($this->mediaObjetCultures->removeElement($mediaObjetCulture)) {
             // set the owning side to null (unless already changed)
-            if ($mediaObjetCulture->getIdObjetCulture() === $this) {
-                $mediaObjetCulture->setIdObjetCulture(null);
+            if ($mediaObjetCulture->getObjetCulture() === $this) {
+                $mediaObjetCulture->setObjetCulture(null);
             }
         }
 

@@ -26,10 +26,10 @@ class EvenementCulture
     private ?\DateTime $DateFin = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenementCultures')]
-    private ?CultureDuMonde $Id_CultureMonde = null;
+    private ?CultureDuMonde $CultureMonde = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenementCultures')]
-    private ?CultureUrbaine $Id_CultureUrbaine = null;
+    private ?CultureUrbaine $CultureUrbaine = null;
 
     /**
      * @var Collection<int, TexteEvenementCulture>
@@ -37,9 +37,16 @@ class EvenementCulture
     #[ORM\OneToMany(targetEntity: TexteEvenementCulture::class, mappedBy: 'evenementCulture')]
     private Collection $texteEvenementCultures;
 
+    /**
+     * @var Collection<int, MediaEvenementCulture>
+     */
+    #[ORM\OneToMany(targetEntity: MediaEvenementCulture::class, mappedBy: 'EvenementCulture')]
+    private Collection $mediaEvenementCultures;
+
     public function __construct()
     {
         $this->texteEvenementCultures = new ArrayCollection();
+        $this->mediaEvenementCultures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,26 +90,26 @@ class EvenementCulture
         return $this;
     }
 
-    public function getIdCultureMonde(): ?CultureDuMonde
+    public function getCultureMonde(): ?CultureDuMonde
     {
-        return $this->Id_CultureMonde;
+        return $this->CultureMonde;
     }
 
-    public function setIdCultureMonde(?CultureDuMonde $Id_CultureMonde): static
+    public function setCultureMonde(?CultureDuMonde $CultureMonde): static
     {
-        $this->Id_CultureMonde = $Id_CultureMonde;
+        $this->CultureMonde = $CultureMonde;
 
         return $this;
     }
 
-    public function getIdCultureUrbaine(): ?CultureUrbaine
+    public function getCultureUrbaine(): ?CultureUrbaine
     {
-        return $this->Id_CultureUrbaine;
+        return $this->CultureUrbaine;
     }
 
-    public function setIdCultureUrbaine(?CultureUrbaine $Id_CultureUrbaine): static
+    public function setCultureUrbaine(?CultureUrbaine $CultureUrbaine): static
     {
-        $this->Id_CultureUrbaine = $Id_CultureUrbaine;
+        $this->CultureUrbaine = $CultureUrbaine;
 
         return $this;
     }
@@ -131,6 +138,36 @@ class EvenementCulture
             // set the owning side to null (unless already changed)
             if ($texteEvenementCulture->getEvenementCulture() === $this) {
                 $texteEvenementCulture->setEvenementCulture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MediaEvenementCulture>
+     */
+    public function getMediaEvenementCultures(): Collection
+    {
+        return $this->mediaEvenementCultures;
+    }
+
+    public function addMediaEvenementCulture(MediaEvenementCulture $mediaEvenementCulture): static
+    {
+        if (!$this->mediaEvenementCultures->contains($mediaEvenementCulture)) {
+            $this->mediaEvenementCultures->add($mediaEvenementCulture);
+            $mediaEvenementCulture->setEvenementCulture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMediaEvenementCulture(MediaEvenementCulture $mediaEvenementCulture): static
+    {
+        if ($this->mediaEvenementCultures->removeElement($mediaEvenementCulture)) {
+            // set the owning side to null (unless already changed)
+            if ($mediaEvenementCulture->getEvenementCulture() === $this) {
+                $mediaEvenementCulture->setEvenementCulture(null);
             }
         }
 

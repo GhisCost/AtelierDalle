@@ -19,18 +19,18 @@ class GastronomieDalle
     private ?string $Nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'gastronomieDalles')]
-    private ?CultureDuMonde $Id_CultureMonde = null;
+    private ?CultureDuMonde $CultureMonde = null;
 
     /**
      * @var Collection<int, MediaGastronomie>
      */
-    #[ORM\OneToMany(targetEntity: MediaGastronomie::class, mappedBy: 'Id_Gastronomie')]
+    #[ORM\OneToMany(targetEntity: MediaGastronomie::class, mappedBy: 'Gastronomie')]
     private Collection $mediaGastronomies;
 
     /**
      * @var Collection<int, TexteGastronomie>
      */
-    #[ORM\OneToMany(targetEntity: TexteGastronomie::class, mappedBy: 'Id_Gastronomie')]
+    #[ORM\OneToMany(targetEntity: TexteGastronomie::class, mappedBy: 'Gastronomie')]
     private Collection $contenu;
 
     public function __construct()
@@ -56,14 +56,14 @@ class GastronomieDalle
         return $this;
     }
 
-    public function getIdCultureMonde(): ?CultureDuMonde
+    public function getCultureMonde(): ?CultureDuMonde
     {
-        return $this->Id_CultureMonde;
+        return $this->CultureMonde;
     }
 
-    public function setIdCultureMonde(?CultureDuMonde $Id_CultureMonde): static
+    public function setCultureMonde(?CultureDuMonde $CultureMonde): static
     {
-        $this->Id_CultureMonde = $Id_CultureMonde;
+        $this->CultureMonde = $CultureMonde;
 
         return $this;
     }
@@ -110,7 +110,7 @@ class GastronomieDalle
     {
         if (!$this->contenu->contains($contenu)) {
             $this->contenu->add($contenu);
-            $contenu->setIdGastronomie($this);
+            $contenu->setGastronomie($this);
         }
 
         return $this;
@@ -120,8 +120,8 @@ class GastronomieDalle
     {
         if ($this->contenu->removeElement($contenu)) {
             // set the owning side to null (unless already changed)
-            if ($contenu->getIdGastronomie() === $this) {
-                $contenu->setIdGastronomie(null);
+            if ($contenu->getGastronomie() === $this) {
+                $contenu->setGastronomie(null);
             }
         }
 

@@ -4,7 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\UsersCrudController;
 use App\Entity\CultureDuMonde;
+use App\Entity\CultureUrbaine;
 use App\Entity\EvenementCulture;
+use App\Entity\GastronomieDalle;
+use App\Entity\MediaEvenementCulture;
+use App\Entity\MediaGastronomie;
 use App\Entity\MediaPortrait;
 use App\Entity\PortraitHabitant;
 use App\Entity\PortraitNonHabitant;
@@ -51,17 +55,30 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Users', 'fas fa-list', Users::class);
-        yield MenuItem::linkToCrud('Portrait Habitant', 'fas fa-list', PortraitHabitant::class);
-        yield MenuItem::linkToCrud('Portrait Non Habitant', 'fas fa-list', PortraitNonHabitant::class);
-        yield MenuItem::linkToCrud('Media Portrait', 'fas fa-list', MediaPortrait::class);
-        yield MenuItem::linkToCrud('Texte Portrait', 'fas fa-list', TextePortrait::class);
-        yield MenuItem::linkToCrud('Texte Gastronomie', 'fas fa-list', TexteGastronomie::class);
-        yield MenuItem::linkToCrud('Culture du Monde', 'fas fa-list', CultureDuMonde::class);
-        yield MenuItem::linkToCrud('Evenement Culture', 'fas fa-list', EvenementCulture::class);
+        yield MenuItem::linkToCrud('Users', 'fa fa-list', Users::class);
+
+        yield MenuItem::section('Portrait');
+        yield MenuItem::linkToCrud('Portrait Habitant', 'fa fa-list', PortraitHabitant::class);
+        yield MenuItem::linkToCrud('Portrait Non Habitant', 'fa fa-list', PortraitNonHabitant::class);
+        yield MenuItem::linkToCrud('Media Portrait', 'fa fa-photo-film', MediaPortrait::class);
+        yield MenuItem::linkToCrud('Texte Portrait', 'fa fa-align-justify', TextePortrait::class);
+
+        yield MenuItem::section('Culture');
+        yield MenuItem::linkToCrud('Culture du Monde', 'fa fa-list', CultureDuMonde::class);
+        yield MenuItem::linkToCrud('Culture Urbaine', 'fa fa-list', CultureUrbaine::class);
+
+        yield MenuItem::section('Evenement');
+        yield MenuItem::linkToCrud('Evenement Culture', 'fa fa-list', EvenementCulture::class);
+        yield MenuItem::linkToCrud('Media Evenement Culture', 'fa fa-photo-film', MediaEvenementCulture::class);
+        
+        yield MenuItem::section('Gastronomie');
+        yield MenuItem::linkToCrud('Gastronomie de la Dalle', 'fa fa-list', GastronomieDalle::class);
+        yield MenuItem::linkToCrud('Media Gatronomie', 'fa fa-photo-film', MediaGastronomie::class);
+        yield MenuItem::linkToCrud('Texte Gastronomie', 'fa fa-align-justify', TexteGastronomie::class);
+
+        
         yield MenuItem::section('Site');
         yield MenuItem::linkToUrl('Retour au site', 'fa fa-globe', '/');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 
 

@@ -25,13 +25,13 @@ class AteliersPlantes
     /**
      * @var Collection<int, MediaAtelier>
      */
-    #[ORM\OneToMany(targetEntity: MediaAtelier::class, mappedBy: 'Id_Atelier')]
+    #[ORM\OneToMany(targetEntity: MediaAtelier::class, mappedBy: 'Atelier')]
     private Collection $mediaAteliers;
 
     /**
      * @var Collection<int, TexteAteliers>
      */
-    #[ORM\OneToMany(targetEntity: TexteAteliers::class, mappedBy: 'id_Atelier')]
+    #[ORM\OneToMany(targetEntity: TexteAteliers::class, mappedBy: 'Atelier')]
     private Collection $texteAteliers;
 
     public function __construct()
@@ -111,7 +111,7 @@ class AteliersPlantes
     {
         if (!$this->texteAteliers->contains($texteAtelier)) {
             $this->texteAteliers->add($texteAtelier);
-            $texteAtelier->setIdAtelier($this);
+            $texteAtelier->setAtelier($this);
         }
 
         return $this;
@@ -121,8 +121,8 @@ class AteliersPlantes
     {
         if ($this->texteAteliers->removeElement($texteAtelier)) {
             // set the owning side to null (unless already changed)
-            if ($texteAtelier->getIdAtelier() === $this) {
-                $texteAtelier->setIdAtelier(null);
+            if ($texteAtelier->getAtelier() === $this) {
+                $texteAtelier->setAtelier(null);
             }
         }
 

@@ -28,13 +28,13 @@ class EvenementPlantes
     /**
      * @var Collection<int, MediaEvenementPlante>
      */
-    #[ORM\OneToMany(targetEntity: MediaEvenementPlante::class, mappedBy: 'Id_evenementPlantes')]
+    #[ORM\OneToMany(targetEntity: MediaEvenementPlante::class, mappedBy: 'evenementPlantes')]
     private Collection $mediaEvenementPlantes;
 
     /**
      * @var Collection<int, TexteEvenementPlantes>
      */
-    #[ORM\OneToMany(targetEntity: TexteEvenementPlantes::class, mappedBy: 'Id_EvenementPlantes')]
+    #[ORM\OneToMany(targetEntity: TexteEvenementPlantes::class, mappedBy: 'EvenementPlantes')]
     private Collection $texteEvenementPlantes;
 
     public function __construct()
@@ -126,7 +126,7 @@ class EvenementPlantes
     {
         if (!$this->texteEvenementPlantes->contains($texteEvenementPlante)) {
             $this->texteEvenementPlantes->add($texteEvenementPlante);
-            $texteEvenementPlante->setIdEvenementPlantes($this);
+            $texteEvenementPlante->setEvenementPlantes($this);
         }
 
         return $this;
@@ -136,8 +136,8 @@ class EvenementPlantes
     {
         if ($this->texteEvenementPlantes->removeElement($texteEvenementPlante)) {
             // set the owning side to null (unless already changed)
-            if ($texteEvenementPlante->getIdEvenementPlantes() === $this) {
-                $texteEvenementPlante->setIdEvenementPlantes(null);
+            if ($texteEvenementPlante->getEvenementPlantes() === $this) {
+                $texteEvenementPlante->setEvenementPlantes(null);
             }
         }
 

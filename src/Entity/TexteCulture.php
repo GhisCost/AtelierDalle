@@ -18,10 +18,10 @@ class TexteCulture
     private ?string $contenu = null;
 
     #[ORM\ManyToOne(inversedBy: 'texteCultures')]
-    private ?CultureDuMonde $Id_CultureMonde = null;
+    private ?CultureDuMonde $CultureMonde = null;
 
     #[ORM\ManyToOne(inversedBy: 'texteCultures')]
-    private ?CultureUrbaine $Id_CultureUrbaine = null;
+    private ?CultureUrbaine $CultureUrbaine = null;
 
     public function getId(): ?int
     {
@@ -40,26 +40,26 @@ class TexteCulture
         return $this;
     }
 
-    public function getIdCultureMonde(): ?CultureDuMonde
+    public function getCultureMonde(): ?CultureDuMonde
     {
-        return $this->Id_CultureMonde;
+        return $this->CultureMonde;
     }
 
-    public function setIdCultureMonde(?CultureDuMonde $Id_CultureMonde): static
+    public function setCultureMonde(?CultureDuMonde $CultureMonde): static
     {
-        $this->Id_CultureMonde = $Id_CultureMonde;
+        $this->CultureMonde = $CultureMonde;
 
         return $this;
     }
 
-    public function getIdCultureUrbaine(): ?CultureUrbaine
+    public function getCultureUrbaine(): ?CultureUrbaine
     {
-        return $this->Id_CultureUrbaine;
+        return $this->CultureUrbaine;
     }
 
-    public function setIdCultureUrbaine(?CultureUrbaine $Id_CultureUrbaine): static
+    public function setCultureUrbaine(?CultureUrbaine $CultureUrbaine): static
     {
-        $this->Id_CultureUrbaine = $Id_CultureUrbaine;
+        $this->CultureUrbaine = $CultureUrbaine;
 
         return $this;
     }

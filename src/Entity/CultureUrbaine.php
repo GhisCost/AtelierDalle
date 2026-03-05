@@ -25,19 +25,19 @@ class CultureUrbaine
     /**
      * @var Collection<int, MediaCulture>
      */
-    #[ORM\OneToMany(targetEntity: MediaCulture::class, mappedBy: 'Id_CultureUrbaine')]
+    #[ORM\OneToMany(targetEntity: MediaCulture::class, mappedBy: 'CultureUrbaine')]
     private Collection $mediaCultures;
 
     /**
      * @var Collection<int, EvenementCulture>
      */
-    #[ORM\OneToMany(targetEntity: EvenementCulture::class, mappedBy: 'Id_CultureUrbaine')]
+    #[ORM\OneToMany(targetEntity: EvenementCulture::class, mappedBy: 'CultureUrbaine')]
     private Collection $evenementCultures;
 
     /**
      * @var Collection<int, TexteCulture>
      */
-    #[ORM\OneToMany(targetEntity: TexteCulture::class, mappedBy: 'Id_CultureUrbaine')]
+    #[ORM\OneToMany(targetEntity: TexteCulture::class, mappedBy: 'CultureUrbaine')]
     private Collection $texteCultures;
 
     public function __construct()
@@ -118,7 +118,7 @@ class CultureUrbaine
     {
         if (!$this->evenementCultures->contains($evenementCulture)) {
             $this->evenementCultures->add($evenementCulture);
-            $evenementCulture->setIdCultureUrbaine($this);
+            $evenementCulture->setCultureUrbaine($this);
         }
 
         return $this;
@@ -128,8 +128,8 @@ class CultureUrbaine
     {
         if ($this->evenementCultures->removeElement($evenementCulture)) {
             // set the owning side to null (unless already changed)
-            if ($evenementCulture->getIdCultureUrbaine() === $this) {
-                $evenementCulture->setIdCultureUrbaine(null);
+            if ($evenementCulture->getCultureUrbaine() === $this) {
+                $evenementCulture->setCultureUrbaine(null);
             }
         }
 
@@ -148,7 +148,7 @@ class CultureUrbaine
     {
         if (!$this->texteCultures->contains($texteCulture)) {
             $this->texteCultures->add($texteCulture);
-            $texteCulture->setIdCultureUrbaine($this);
+            $texteCulture->setCultureUrbaine($this);
         }
 
         return $this;
@@ -158,8 +158,8 @@ class CultureUrbaine
     {
         if ($this->texteCultures->removeElement($texteCulture)) {
             // set the owning side to null (unless already changed)
-            if ($texteCulture->getIdCultureUrbaine() === $this) {
-                $texteCulture->setIdCultureUrbaine(null);
+            if ($texteCulture->getCultureUrbaine() === $this) {
+                $texteCulture->setCultureUrbaine(null);
             }
         }
 
