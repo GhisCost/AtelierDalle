@@ -19,7 +19,6 @@ class PortraitHabitantCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            // IdField::new('id'),
             TextField::new('prenom'),
             TextField::new('batiment'),
             TextField::new('culture')

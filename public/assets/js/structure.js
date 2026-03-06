@@ -103,6 +103,12 @@ window.addEventListener("popstate", () => {
         });
 });
 
+const spacing = 15; // distanza tra i punti
+      const radius = 0.5; // raggio del punto
+      const color = "#999";
+ 
+
+
 function initCanvas() {
   const canva = document.getElementById("canvas");
  
@@ -110,6 +116,23 @@ function initCanvas() {
     console.error("Canvas con id='canvas' non trovato");
     return;
   }
+
+   const bgCanvas = document.createElement("canvas");
+      const bgCtx = bgCanvas.getContext("2d");
+
+      function drawDots() {
+        bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+ 
+        for (let x = spacing / 2; x < bgCanvas.width; x += spacing) {
+          for (let y = spacing / 2; y < bgCanvas.height; y += spacing) {
+            bgCtx.beginPath();
+            bgCtx.arc(x, y, radius, 0, Math.PI * 2);
+            bgCtx.fillStyle = color;
+            bgCtx.fill();
+          }
+        }
+      }
+ 
  
   const context = canva.getContext("2d");
  
@@ -119,6 +142,11 @@ function initCanvas() {
   function resizeCanvas() {
     canva.width = window.innerWidth;
     canva.height = window.innerHeight;
+
+    bgCanvas.width = canva.width;
+        bgCanvas.height = canva.height;
+
+    drawDots();
   }
  
   class Ligne {
@@ -273,6 +301,7 @@ function initCanvas() {
  
   function animate() {
     context.clearRect(0, 0, canva.width, canva.height);
+    context.drawImage(bgCanvas, 0, 0);
  
     lignes.forEach((l) => {
       l.draw();
