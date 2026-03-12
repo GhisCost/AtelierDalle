@@ -101,4 +101,10 @@ class ObjetHabitant
 
         return $this;
     }
+
+     public function __toString(): string
+    {
+        return $this->nom ?? 'Nouvel objet';
+    }
+
 }

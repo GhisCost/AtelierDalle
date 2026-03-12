@@ -30,6 +30,9 @@ class Appartement
     #[ORM\OneToMany(targetEntity: MediaAppartement::class, mappedBy: 'Appartement')]
     private Collection $mediaAppartements;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Numero = null;
+
     public function __construct()
     {
         $this->mediaAppartements = new ArrayCollection();
@@ -105,4 +108,22 @@ class Appartement
 
         return $this;
     }
+
+    public function getNumero(): ?string
+    {
+        return $this->Numero;
+    }
+
+    public function setNumero(string $Numero): static
+    {
+        $this->Numero = $Numero;
+
+        return $this;
+    }
+
+    public function __toString(): string
+{
+    return $this->getNumero() ?? 'Numero inconu' ;
+}
+
 }
