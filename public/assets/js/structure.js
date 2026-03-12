@@ -181,6 +181,7 @@ function initCanvas() {
             if (side === "top") startY = src.top + window.scrollY;
             else if (side === "left") { startX = src.left; startY = src.top + src.height/2 + window.scrollY; }
             else if (side === "right") { startX = src.right; startY = src.top + src.height/2 + window.scrollY; }
+            else if (side === "bottom") startY = src.bottom + window.scrollY;
 
             targets.forEach((target, tIndex) => {
                 const trg = target.getBoundingClientRect();
@@ -188,6 +189,7 @@ function initCanvas() {
                 if (targetSide === "top") endY = trg.top + window.scrollY;
                 else if (targetSide === "left") { endX = trg.left; endY = trg.top + trg.height/2 + window.scrollY; }
                 else if (targetSide === "right") { endX = trg.right; endY = trg.top + trg.height/2 + window.scrollY; }
+                else if (targetSide === 'bottom') endY = trg.bottom + window.scrollY;
 
                 const direction = ((sIndex + tIndex) % 2 === 0 ? 1 : -1) * curveStrength;
                 lignes.push(new Ligne(startX, startY, endX, endY, direction));
@@ -210,8 +212,8 @@ function initCanvas() {
 
     // Configurazione linee: puoi cambiarla come vuoi
     connections = [
-        { sources: [uno], targets: [due], side: "right", targetSide: "left", curveStrength: 0.3 },
-        { sources: [due], targets: [tre], side: "top", targetSide: "left", curveStrength: -0.3 }
+        { sources: [uno], targets: [due], side: "right", targetSide: "top", curveStrength: 0.3 },
+        { sources: [due], targets: [tre], side: "bottom", targetSide: "bottom", curveStrength: -0.3 }
     ];
 
     lignes = [];
