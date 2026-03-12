@@ -178,3 +178,10 @@ width: 51px;
     margin-left: 5px;
     width: 39px;
 }
+
+/* Echafaudage */
+
+.menu-link {
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
