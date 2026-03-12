@@ -1,4 +1,5 @@
-const canvas = document.getElementById("cuboCanvas");
+function initEchaf()
+{const canvas = document.getElementById("cuboCanvas");
 const ctx = canvas.getContext("2d");
 
 const links = document.querySelectorAll(".menu-link");
@@ -553,4 +554,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-animate();
+animate();}
