@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{objet.nom}}
+{% endblock %}
+
+{% block body %}
+<div>
+    <h1 class="text-5xl font-bold py-8 text-center mb-6"> {{objet.nom}} </h1>
+
+	<div class="text-center" >
+	<a href="{{path('app_choix_objet_habitant',{id:objet.habitant.id})}}" class="mx-12 font-semibold text-xl" > Objets de {{objet.habitant.prenom}} </a>
+	<a href="{{path('app_choix_objet_habitant',{id:objet.habitant.id})}}" class="mx-12 font-semibold text-xl"> Portrait de {{objet.habitant.prenom}} </a>
+	</div> 
+
+
+
+	<div class="m-8 flex flex-col items-center">
+		{% for media in objet.mediaObjets %}
+			{% set ext = media.contenu|split('.')|last|lower %}
+			{% if ext == 'mp4' %}
+				<video controls class="w-[20%] h-auto block mb-4 shadow-lg mt-[40px]">
+					<source src="{{ asset('uploads/media/' ~ media.contenu) }}" type="video/mp4">
+				</video>
+			{% endif %}
+		{% endfor %}
+    </div>
+</div>
+	{% endblock %}
