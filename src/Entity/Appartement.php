@@ -120,4 +120,10 @@ class Appartement
 
         return $this;
     }
+
+    public function __toString(): string
+{
+    return $this->getNumero() ?? 'Numero inconu' ;
+}
+
 }
