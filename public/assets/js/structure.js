@@ -359,3 +359,35 @@ function initCanvas() {
 // })
 
 
+// JS des carrousels
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Pour chaque carrousel
+    for (let i = 1; i <= 5; i++) {
+        const carousel = document.getElementById(`carousel${i}`);
+        const prevBtn = document.querySelector(`.carousel-prev[data-carousel="carousel${i}"]`);
+        const nextBtn = document.querySelector(`.carousel-next[data-carousel="carousel${i}"]`);
+        let currentIndex = 0;
+        const slides = carousel.children;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+    }
+});

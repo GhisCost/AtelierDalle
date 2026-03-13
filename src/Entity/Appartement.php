@@ -27,7 +27,7 @@ class Appartement
     /**
      * @var Collection<int, MediaAppartement>
      */
-    #[ORM\OneToMany(targetEntity: MediaAppartement::class, mappedBy: 'Appartement')]
+    #[ORM\OneToMany(targetEntity: MediaAppartement::class, mappedBy: 'appartement')]
     private Collection $mediaAppartements;
 
     #[ORM\Column(length: 255)]
