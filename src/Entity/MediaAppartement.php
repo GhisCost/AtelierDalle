@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MediaAppartementRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\Categorie;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -14,6 +15,7 @@ class MediaAppartement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'mediaAppartements')]
@@ -28,6 +30,9 @@ class MediaAppartement
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(enumType: Categorie::class)]
+    private ?Categorie $Categorie = null;
 
     public function getId(): ?int
     {
@@ -73,5 +78,17 @@ class MediaAppartement
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+     public function getCategorie(): ?Categorie
+    {
+        return $this->Categorie;
+    }
+ 
+    public function setCategorie(Categorie $Categorie): static
+    {
+        $this->Categorie = $Categorie;
+ 
+        return $this;
     }
 }

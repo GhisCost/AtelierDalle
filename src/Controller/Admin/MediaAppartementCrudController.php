@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\MediaAppartement;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use App\Enum\Categorie;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class MediaAppartementCrudController extends AbstractCrudController
@@ -33,6 +35,12 @@ class MediaAppartementCrudController extends AbstractCrudController
 
         AssociationField::new('appartement')
             ->setLabel('Appartement'),
+
+            ChoiceField::new('Categorie', 'Catégorie')
+            ->setChoices(array_combine(array_map(fn(Categorie $c) => $c->value, Categorie::cases()),
+            Categorie::cases()
+            ))
+            ->setRequired(true),
             
     ];
     }
