@@ -2,7 +2,7 @@ let x = 0, y = 0;
 let animationId = null;
 
 const spacing = 15;
-const radius = 0.5;
+const radius = 1;
 const color = "#999";
 
 const bgCanvas = document.createElement("canvas");
@@ -293,7 +293,7 @@ function makeLine(start, end) {
         end,
         progress: 0,
         delay: Math.random() * 200,
-        speed: 0.001 + Math.random() * 0.002,
+        speed: 0.01 + Math.random() * 0.002,
     };
 }
 
@@ -668,6 +668,7 @@ function normalize(v) {
 function showLinks() {
     links.forEach(link => {
         link.style.opacity = "1";
+        link.style.scale = "1";
     });
 }
 
@@ -689,14 +690,14 @@ lines = addProtrusions(lines, 0.5, 35);
 
 // Radici (inizialmente con delay alto, non visibili)
 const rootLines = generateRoots(baseY, 52, 3);
-rootLines.forEach((l) => (l.delay = 400));
+rootLines.forEach((l) => (l.delay = 100));
 
 // Rami laterali (anche loro con delay alto)
 const sideBranches = generateSideBranches(300, 20, 2);
-sideBranches.forEach((l) => (l.delay = 600));
+sideBranches.forEach((l) => (l.delay = 100));
 
 const topBranches = generateTopBranches(200, 15, 2);
-topBranches.forEach((l) => (l.delay = 700));
+topBranches.forEach((l) => (l.delay = 120));
 
 // lines = lines.concat(topBranches);
 
@@ -731,7 +732,7 @@ function animate() {
         if (l.isRoot) ctx.lineWidth = l.thickness * l.progress;
         else ctx.lineWidth = 0.5;
 
-        ctx.strokeStyle = l.isRoot ? "brown" : "grey";
+        ctx.strokeStyle ="grey";
 
         ctx.beginPath();
         ctx.moveTo(x0, y0);
@@ -745,7 +746,7 @@ function animate() {
             const grow = Math.min((l.progress - 0.9) / 0.1, 1);
 
             ctx.fillStyle = "crimson";
-
+            showLinks();
             drawFruitShape(fx, fy, l.fruit.size, grow);
         }
     });
@@ -770,10 +771,10 @@ function animate() {
             done = false;
         }
 
-        else if (phase === 2) {
-  showLinks();
-  phase = 3;
-}
+//         else if (phase === 2) {
+  
+//   phase = 3;
+// }
     }
 
     requestAnimationFrame(animate);
