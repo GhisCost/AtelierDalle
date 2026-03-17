@@ -179,6 +179,36 @@ width: 51px;
     width: 39px;
 }
 
+#atom{
+position:fixed;
+top:0;
+left:0;
+width: 20vh;
+height: 20vh;
+/* background-color: rgba(0, 0, 0, 0.466); */
+z-index:9999;
+pointer-events:auto;
+border-radius: 50%;
+margin-top: 5px;
+margin-left: 5px;
+}
+
+#atom canvas{
+pointer-events:auto;
+}
+#textatome {
+    position: fixed;
+    padding: 6px 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    font-size: 12px;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    transform: translate(-50%, -120%);
+    z-index: 9999;
+}
 /* Echafaudage */
 
 .menu-link {

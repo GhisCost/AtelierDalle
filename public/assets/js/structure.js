@@ -40,6 +40,7 @@ function drawDots() {
 // }
 
 function initPage() {
+  
     // initCursor();
     if (document.getElementById("canvas")) {
         initCanvas();
