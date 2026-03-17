@@ -110,10 +110,7 @@ class Appartement
 
         return $this;
     }
-    public function __tostring(): string
-    {
-        return $this->Numero;
-    }
+
 
     public function getNumero(): ?string
     {
@@ -126,5 +123,10 @@ class Appartement
 
         return $this;
     }
+
+    public function __toString(): string
+{
+    return $this->getNumero() ?? 'Numero inconu' ;
+}
 
 }

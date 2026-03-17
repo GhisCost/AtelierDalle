@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\MediaAppartement;
+use App\Enum\Categorie;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -18,31 +19,33 @@ class MediaAppartementCrudController extends AbstractCrudController
         return MediaAppartement::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
-      return [
-        // Affiche le nom du fichier uniquement dans la liste
-        TextField::new('contenu', 'Fichier')
-            ->onlyOnIndex(), 
+        return [
+            // Affiche le nom du fichier uniquement dans la liste
+            TextField::new('contenu', 'Fichier')
+                ->onlyOnIndex(),
 
-        // Champ d'upload pour le formulaire (new/edit)
-        Field::new('file')
-            ->setFormType(VichFileType::class)
-            ->setLabel('Image ou Vidéo')
-            ->setFormTypeOption('required', false)
-            ->onlyOnForms(),
+            // Champ d'upload pour le formulaire (new/edit)
+            Field::new('file')
+                ->setFormType(VichFileType::class)
+                ->setLabel('Image ou Vidéo')
+                ->setFormTypeOption('required', false)
+                ->onlyOnForms(),
 
-        AssociationField::new('appartement')
-            ->setLabel('Appartement'),
+            AssociationField::new('appartement')
+                ->setLabel('Appartement'),
 
+
+            // Champ pour la catégorie (Enum)
             ChoiceField::new('Categorie', 'Catégorie')
-            ->setChoices(array_combine(array_map(fn(Categorie $c) => $c->value, Categorie::cases()),
-            Categorie::cases()
-            ))
-            ->setRequired(true),
-            
-    ];
+                ->setChoices(array_combine(
+                    array_map(fn(Categorie $c) => $c->value, Categorie::cases()),
+                    Categorie::cases()
+                ))
+                ->setRequired(true),
+        ];
     }
-    
+
 }

@@ -11,14 +11,20 @@
             {% block importmap %}
             {{ importmap('app') }}
             {% endblock %}
-            <script src="{{asset('assets/js/structure.js')}}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+            <script src="{{asset('assets/js/atom.js')}}" defer ></script>
+            <script src="{{asset('assets/js/structure.js')}}" defer ></script>
         {% endblock %}
     </head>
   <body class="bg-white">
+    <div id="atom"></div>
+    <div id="textatome"></div>
+
+
+  <canvas id="canvas"></canvas>
     
     <div id="page-container">
-    <div id="cursor">
-    </div>
+ 
         <div class="corps">
         {% include "_partials/_header.html.twig" %}
         {% block body %}
