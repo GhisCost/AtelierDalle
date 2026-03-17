@@ -1,27 +1,10 @@
 let x = 0, y = 0;
 
 
-function initCursor() {
-    const cursor = document.getElementById('cursor');
-    if (!cursor) return;
-
-    document.addEventListener('mousemove', e => {
-        x = e.clientX;
-        y = e.clientY;
-    });
-
-    function animateCircle() {
-        cursor.style.left = x + 'px';
-        cursor.style.top = y + 'px';
-        requestAnimationFrame(animateCircle);
-    }
-
-    animateCircle();
-}
 
 function initPage() {
     initCanvas();
-    initCursor();
+    
 }
 
 document.addEventListener('DOMContentLoaded', () => {
