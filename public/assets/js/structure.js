@@ -20,26 +20,26 @@ function drawDots() {
     }
 }
 
-function initCursor() {
-    const cursor = document.getElementById("cursor");
-    if (!cursor) return;
+// function initCursor() {
+//     const cursor = document.getElementById("cursor");
+//     if (!cursor) return;
 
-    document.onmousemove = (e) => {
-        x = e.clientX;
-        y = e.clientY;
-    };
+//     document.onmousemove = (e) => {
+//         x = e.clientX;
+//         y = e.clientY;
+//     };
 
-    function animateCircle() {
-        cursor.style.left = x + "px";
-        cursor.style.top = y + "px";
-        requestAnimationFrame(animateCircle);
-    }
+//     function animateCircle() {
+//         cursor.style.left = x + "px";
+//         cursor.style.top = y + "px";
+//         requestAnimationFrame(animateCircle);
+//     }
 
-    animateCircle();
-}
+//     animateCircle();
+// }
 
 function initPage() {
-    initCursor();
+    // initCursor();
     if (document.getElementById("canvas")) {
         initCanvas();
     }
