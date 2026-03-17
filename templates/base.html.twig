@@ -12,10 +12,13 @@
             {{ importmap('app') }}
             {% endblock %}
             <script src="{{asset('assets/js/structure.js')}}"></script>
+            {# <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> #}
         {% endblock %}
     </head>
   <body class="bg-white">
-    <canvas id="canvas" class="overflow-hidden"></canvas>
+
+  <canvas id="canvas"></canvas>
+    
     <div id="page-container">
     {# <div id="cursor">
     </div> #}

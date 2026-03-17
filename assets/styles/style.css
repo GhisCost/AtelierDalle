@@ -62,7 +62,7 @@ header {
     width: 200px;
     height: 200px;
     transform-origin: top left;
-    position:absolute;
+    position:fixed;
     z-index:2000;
     transition: transform 0.5s ease-in-out;
 }
@@ -179,6 +179,13 @@ width: 51px;
     width: 39px;
 }
 
+/* Echafaudage */
+
+.menu-link {
+    opacity: 0;
+    scale: 0.1;
+    transition: all 5s ease-in;
+}
 
 /* Css carousel !! */
 
