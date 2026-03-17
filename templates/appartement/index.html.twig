@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Appartement{% endblock %}
+
+{% block body %}
+
+{# 1. TRI DES IMAGES #}
+{% set planImage = null %}
+{% set papiersPeints = [] %}
+{% set photosImages = [] %}
+
+{% for media in appartement.mediaAppartements %}
+    {% if media.Categorie and media.Categorie.value == 'Plan' %}
+        {% set planImage = media %}
+    {% elseif media.Categorie and media.Categorie.value == 'Papier Peint' %}
+        {% set papiersPeints = papiersPeints|merge([media]) %}
+    {% elseif media.Categorie and media.Categorie.value == 'Photos' %}
+        {% set photosImages = photosImages|merge([media]) %}
+    {% endif %}
+{% endfor %}
+
+{# 2. STRUCTURE PRINCIPALE #}
+<div class="max-w-8xl mx-auto px-4 mb-20">
+
+ 
+<div class="pt-[23vh] mb-12">
+    <ul class="flex flex-row ml-[10vw] gap-12 uppercase tracking-widest text-sm">
+        <li>{{ appartement.batiment }}</li>
+        <li>Escalier {{ appartement.escalier }}</li>
+        <li>Étage {{ appartement.etage }}</li>
+    </ul>
+</div>
+
+
+    {# GRILLE PRINCIPALE #}
+    <div class="grid grid-cols-2 gap-x-0 gap-y-0 w-[90%] m-auto">
+        
+        <!-- COLONNE GAUCHE -->
+        <div class="flex flex-col gap-4 items-end object-left place-items-start w-[85%]">
+            
+            {# LE PLAN (En haut à gauche) #}
+            <div class="aspect-[4/3] w-full flex items-center justify-center">
+                {% if planImage %}
+                    <img src="{{ vich_uploader_asset(planImage, 'file') }}" 
+                         class="w-full h-full object-contain" 
+                         alt="Plan">
+                {% endif %}
+            </div>
+
+            {# LE BLOC PAPIER PEINT (En bas à gauche) #}
+            <div class="aspect-4/3 w-full flex items-center justify-center">
+                <div class="grid grid-cols-2 gap-4 w-[85%]">
+                    {% for i in 0..3 %}
+                        <div class="aspect-[4/3] w-full">
+                            {% if papiersPeints[i] is defined %}
+                                <img src="{{ vich_uploader_asset(papiersPeints[i], 'file') }}" 
+                                     class="w-full h-full object-contain" 
+                                     alt="Papier Peint">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- COLONNE DROITE -->
+        <div class="flex flex-col gap-0 items-start object-left place-items-end w-[85%]">
+            {% for i in 0..1 %}
+                <div class="aspect-[4/3] w-full flex items-center justify-center">
+                    {% if photosImages[i] is defined %}
+                        <img src="{{ vich_uploader_asset(photosImages[i], 'file') }}" 
+                             class="w-full h-full object-contain" 
+                             alt="Photo {{ i + 1 }}">
+                    {% else %}
+                        {# Carré vide pour maintenir la structure si photo manquante #}
+                        <div class="w-full h-full bg-white"></div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

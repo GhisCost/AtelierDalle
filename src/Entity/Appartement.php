@@ -24,6 +24,7 @@ class Appartement
     #[ORM\Column]
     private ?int $etage = null;
 
+
     /**
      * @var Collection<int, MediaAppartement>
      */
@@ -32,6 +33,7 @@ class Appartement
 
     #[ORM\Column(length: 255)]
     private ?string $Numero = null;
+
 
     public function __construct()
     {
@@ -108,6 +110,7 @@ class Appartement
 
         return $this;
     }
+
 
     public function getNumero(): ?string
     {

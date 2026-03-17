@@ -22,6 +22,7 @@ class AppartementCrudController extends AbstractCrudController
             IntegerField::new('etage'),
             TextField::new('escalier'),
             TextField::new('Numero')
+            
         ];
     }    
 }
