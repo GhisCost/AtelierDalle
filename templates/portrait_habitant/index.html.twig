@@ -8,7 +8,7 @@
 	<h1 class="text-5xl font-bold py-8 text-center">{{ portrait.prenom }}</h1>
 	
     <div class="flex justify-evenly">
-			<a href="" class="font-bold text-lg">
+			<a href="{{path('app_choix_objet_habitant',{id:portrait.id})}}" class="font-bold text-lg">
 				Objets
 			</a>
 			<a href="" class="font-bold text-lg">

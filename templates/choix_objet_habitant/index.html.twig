@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objets de {{habitant.prenom}} {% endblock %}
+
+{% block body %}
+
+<div class="corps-content flex flex-col items-center pt-8">
+  <h1 class="text-center text-5xl font-bold">
+    Les Objets de {{habitant.prenom}}
+  </h1>
+
+  <div class="w-full flex flex-col items-center gap-12 mt-40"> 
+    {% for obj in objets  %}
+      <a href="{{path('app_page_objets_habitants',{id: obj.id}) }}" class="flex flex-col items-center w-1/10">
+      <div class="">
+        <img class="object-cover w-full"
+             src="{{ asset('uploads/media/' ~ obj.mediaObjets[0].contenu )}}" 
+             alt="photo de {{ obj.nom }}">
+      </div>
+      <h3 class="text-lg text-center">{{ obj.nom }}</h3> 
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
