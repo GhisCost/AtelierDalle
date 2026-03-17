@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\ArchiveMediaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArchiveMediaRepository::class)]
+#[Vich\Uploadable]
 class ArchiveMedia
 {
     #[ORM\Id]
@@ -25,6 +28,15 @@ class ArchiveMedia
 
     #[ORM\Column(length: 255)]
     private ?string $categorie = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $contenu = null;
+
+    #[Vich\UploadableField(mapping: 'archive_media', fileNameProperty: 'contenu')]
+    private ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -77,5 +89,36 @@ class ArchiveMedia
         $this->categorie = $categorie;
 
         return $this;
+    }
+
+    public function getContenu(): ?string
+    {
+        return $this->contenu;
+    }
+
+    public function setContenu(string $contenu): static
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+      public function setFile(?File $file = null): void
+    {
+        $this->file = $file;
+
+        if ($file !== null) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

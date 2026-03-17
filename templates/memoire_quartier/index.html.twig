@@ -1,99 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}La mémoire du quartier
-{% endblock %}
+{% block title %}La mémoire du quartier{% endblock %}
 
 {% block body %}
-	<div
-		class="container mx-auto px-4 py-8 space-y-12">
-		{# Carrousel 1 : Portraits Habitants #}
-		<div class="carousel-container">
-			<h2 class="text-2xl font-bold mb-4">Portraits Habitants</h2>
-			<div class="relative overflow-hidden w-1/4 max-w-4xl mx-auto">
-				<div class="flex transition-transform duration-300 ease-in-out" id="carousel1">
-					{% for portrait in portraitsHabitants %}
-						{% for media in portrait.mediaPortraits %}
-							<div class="min-w-full p-2">
-								<img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ portrait.prenom }}" class="w-1-full h-64 object-cover rounded">
-							</div>
-						{% endfor %}
-					{% endfor %}
-				</div>
-				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel1">&lt;</button>
-				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel1">&gt;</button>
-			</div>
-		</div>
+    <div class="container mx-auto px-4 py-8 space-y-12">
+        {# Carrousel 1 : Portraits Habitants #}
+        <div class="carousel-container">
+            <h2 class="text-2xl font-bold mb-4">Portraits Habitants</h2>
+            <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+                <div class="flex transition-transform duration-300 ease-in-out" id="carousel1">
+                    
+                    <div class="flex w-full">
+                        {% for portrait in portraitsHabitants %}
+                            {% if portrait.mediaPortraits.first is not null %}
+                                <div class="min-w-[23%] p-2 vignette">
+                                    <a href="{{ path('app_portrait_habitant', {'id': portrait.id}) }}">
+                                        <img src="{{ asset('uploads/media/' ~ portrait.mediaPortraits.first.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-32 object-cover rounded">
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel1">&lt;</button>
+                <button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel1">&gt;</button>
+            </div>
+        </div>
 
-		{# Carrousel 2 : Portraits Non Habitants #}
-		<div class="carousel-container">
-			<h2 class="text-2xl font-bold mb-4">Portraits Non Habitants</h2>
-			<div class="relative overflow-hidden w-1/4 max-w-4xl mx-auto">
-				<div class="flex transition-transform duration-300 ease-in-out" id="carousel2">
-					{% for portrait in portraitsNonHabitants %}
-						{% for media in portrait.mediaPortraits %}
-							<div class="min-w-full p-2">
-								<img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-64 object-cover rounded">
-							</div>
-						{% endfor %}
-					{% endfor %}
-				</div>
-				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel2">&lt;</button>
-				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel2">&gt;</button>
-			</div>
-		</div>
+        {# Carrousel 2 : Portraits Non Habitants #}
+        <div class="carousel-container">
+            <h2 class="text-2xl font-bold mb-4">Portraits Non Habitants</h2>
+            <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+                <div class="flex transition-transform duration-300 ease-in-out" id="carousel2">
+                    <div class="flex w-full">
+                        {% for portrait in portraitsNonHabitants %}
+                            {% for media in portrait.mediaPortraits %}
+                                <div class="min-w-[23%] p-2 vignette">
+                                    {# <a href="{{ path('app_portrait_non_habitant_show', {'id': portrait.id}) }}"> #}
+                                        <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-32 object-cover rounded">
+                                    {# </a> #}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel2">&lt;</button>
+                <button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel2">&gt;</button>
+            </div>
+        </div>
 
-		{# Carrousel 3 : Appartements #}
+        {# Carrousel 3 : Appartements #}
+        <div class="carousel-container">
+            <h2 class="text-2xl font-bold mb-4">Appartements</h2>
+            <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+                <div class="flex transition-transform duration-300 ease-in-out" id="carousel3">
+                    <div class="flex w-full">
+                        {% for item in appartementsAvecPhoto %}
+                            <div class="min-w-[23%] p-2 vignette">
+                                {# <a href="{{ path('app_memoire_quartier', {'id': item.appartement.id}) }}"> #}
+                                    <img src="{{ asset('uploads/media/' ~ item.photo.contenu) }}" alt="Photo appartement {{ item.appartement.Numero }}" class="w-full h-32 object-cover rounded">
+                                {# </a> #}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel3">&lt;</button>
+                <button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel3">&gt;</button>
+            </div>
+        </div>
 
-		<div class="carousel-container">
-			<h2 class="text-2xl font-bold mb-4">Photos Appartements</h2>
-			<div class="relative overflow-hidden w-1/4 max-w-4xl mx-auto">
-				<div class="flex transition-transform duration-300 ease-in-out" id="carousel5">
-					{% for item in appartementsAvecPhoto %}
-						<div class="min-w-full p-2">
-							<img src="{{ asset('uploads/media/' ~ item.photo.contenu) }}" alt="Photo appartement {{ item.appartement.Numero }}" class="w-full h-64 object-cover rounded">
-						</div>
-					{% endfor %}
-				</div>
-				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel5">&lt;</button>
-				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel5">&gt;</button>
-			</div>
-		</div>
+        {# Carrousel 4 : Photos Anciennes #}
+        <div class="carousel-container">
+            <h2 class="text-2xl font-bold mb-4">Photos Anciennes</h2>
+            <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+                <div class="flex transition-transform duration-300 ease-in-out" id="carousel4">
+                    <div class="flex w-full">
+                        {% for media in archivesMedia %}
+                            <div class="min-w-[23%] p-2">
+                                {# <a href="{{ asset('uploads/media/' ~ media.contenu) }}" target="_blank"> #}
+                                    <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ media.description }}" class="w-full h-32 object-cover rounded">
+                                {# </a> #}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel4">&lt;</button>
+                <button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel4">&gt;</button>
+            </div>
+        </div>
 
-		{# Carrousel 4 : Archives Media #}
-		<div class="carousel-container">
-			<h2 class="text-2xl font-bold mb-4">Archives Media</h2>
-			<div class="relative overflow-hidden w-full max-w-4xl mx-auto">
-				<div class="flex transition-transform duration-300 ease-in-out" id="carousel4">
-					{% for media in archivesMedia %}
-						<div class="min-w-full p-2">
-							<img src="{{ asset('uploads/media/' ~ media.nom) }}" alt="{{ media.description }}" class="w-full h-64 object-cover rounded">
-
-						</div>
-					{% endfor %}
-				</div>
-				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel4">&lt;</button>
-				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel4">&gt;</button>
-			</div>
-		</div>
-
-		{# Carrousel 5 : Media Appartements (Papier Peint) #}
-		<div class="carousel-container">
-			<h2 class="text-2xl font-bold mb-4">Papier Peint</h2>
-			<div class="relative overflow-hidden w-1/4 max-w-4xl mx-auto">
-				<div class="flex transition-transform duration-300 ease-in-out" id="carousel5">
-					{% for media in mediaAppartementsPapierPeint %}
-						<div class="min-w-full p-2">
-							<img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="Papier peint" class="w-full h-64 object-cover rounded">
-						</div>
-					{% endfor %}
-				</div>
-				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel5">&lt;</button>
-				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel5">&gt;</button>
-			</div>
-		</div>
-	</div>
-
-	{% block javascripts %}
-		{{ parent() }}
-	{% endblock %}
+        {# Carrousel 5 : Media Appartements (Papier Peint) #}
+        <div class="carousel-container">
+            <h2 class="text-2xl font-bold mb-4">Papier Peint</h2>
+            <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+                <div class="flex transition-transform duration-300 ease-in-out " id="carousel5">
+                    <div class="flex w-full justify-between">
+                        {% for media in mediaAppartementsPapierPeint %}
+                            <div class="min-w-[23%] p-2 vignette">
+                                {# <a href="{{ asset('uploads/media/' ~ media.contenu) }}" target="_blank"> #}
+                                    <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="Papier peint" class="w-full h-32 object-cover rounded">
+                                {# </a> #}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel5">&lt;</button>
+                <button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel5">&gt;</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,27 +1,27 @@
-let x = 0, y = 0;
+// let x = 0, y = 0;
 
 
-function initCursor() {
-    const cursor = document.getElementById('cursor');
-    if (!cursor) return;
+// function initCursor() {
+//     const cursor = document.getElementById('cursor');
+//     if (!cursor) return;
 
-    document.addEventListener('mousemove', e => {
-        x = e.clientX;
-        y = e.clientY;
-    });
+//     document.addEventListener('mousemove', e => {
+//         x = e.clientX;
+//         y = e.clientY;
+//     });
 
-    function animateCircle() {
-        cursor.style.left = x + 'px';
-        cursor.style.top = y + 'px';
-        requestAnimationFrame(animateCircle);
-    }
+//     function animateCircle() {
+//         cursor.style.left = x + 'px';
+//         cursor.style.top = y + 'px';
+//         requestAnimationFrame(animateCircle);
+//     }
 
-    animateCircle();
-}
+//     animateCircle();
+// }
 
 function initPage() {
     initCanvas();
-    initCursor();
+    // initCursor();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -364,30 +364,45 @@ function initCanvas() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Pour chaque carrousel
-    for (let i = 1; i <= 5; i++) {
-        const carousel = document.getElementById(`carousel${i}`);
-        const prevBtn = document.querySelector(`.carousel-prev[data-carousel="carousel${i}"]`);
-        const nextBtn = document.querySelector(`.carousel-next[data-carousel="carousel${i}"]`);
-        let currentIndex = 0;
-        const slides = carousel.children;
+    // Sélectionne tous les carrousels
+    let carousels = document.querySelectorAll('[id^="carousel"]');
 
-        function updateCarousel() {
-            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    carousels.forEach(carousel => {
+        let id = carousel.id;
+        let container = carousel.querySelector('.flex');
+        let items = carousel.querySelectorAll('.vignette');
+        let prevBtn = document.querySelector(`[data-carousel="${id}"].carousel-prev`);
+        let nextBtn = document.querySelector(`[data-carousel="${id}"].carousel-next`);
+
+        let currentIndex = 0;
+        let itemWidth = 23; // % de la largeur d'une image
+
+        // Met à jour la position du carrousel
+        function updatePosition() {
+            let offset = -currentIndex * itemWidth;
+            container.style.transform = `translateX(${offset}%)`;
+            // Désactive les boutons si on est au début ou à la fin
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= items.length - 4;
         }
 
+        // Événement pour le bouton précédent
         prevBtn.addEventListener('click', () => {
             if (currentIndex > 0) {
                 currentIndex--;
-                updateCarousel();
+                updatePosition();
             }
         });
 
+        // Événement pour le bouton suivant
         nextBtn.addEventListener('click', () => {
-            if (currentIndex < slides.length - 1) {
+            if (currentIndex < items.length - 4) {
                 currentIndex++;
-                updateCarousel();
+                updatePosition();
             }
         });
-    }
+
+        // Initialise la position
+        updatePosition();
+    });
 });
