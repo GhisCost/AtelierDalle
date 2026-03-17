@@ -12,7 +12,6 @@ final class CultureController extends AbstractController
     public function index(): Response
     {
         return $this->render('culture/index.html.twig', [
-            'controller_name' => 'CultureController',
         ]);
     }
 }

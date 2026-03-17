@@ -12,7 +12,7 @@ final class LiensAtelierController extends AbstractController
     public function index(): Response
     {
         return $this->render('liens_atelier/index.html.twig', [
-            'controller_name' => 'LiensAtelierController',
+           
         ]);
     }
 }

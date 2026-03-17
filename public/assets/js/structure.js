@@ -1,5 +1,6 @@
 let x = 0, y = 0;
 let animationId = null;
+// let x = 0, y = 0;
 
 const spacing = 15;
 const radius = 1;
@@ -781,3 +782,50 @@ function animate() {
 }
 
 animate();}
+// JS des carrousels
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionne tous les carrousels
+    let carousels = document.querySelectorAll('[id^="carousel"]');
+
+    carousels.forEach(carousel => {
+        let id = carousel.id;
+        let container = carousel.querySelector('.flex');
+        let items = carousel.querySelectorAll('.vignette');
+        let prevBtn = document.querySelector(`[data-carousel="${id}"].carousel-prev`);
+        let nextBtn = document.querySelector(`[data-carousel="${id}"].carousel-next`);
+
+        let currentIndex = 0;
+        let itemWidth = 23; // % de la largeur d'une image
+
+        // Met à jour la position du carrousel
+        function updatePosition() {
+            let offset = -currentIndex * itemWidth;
+            container.style.transform = `translateX(${offset}%)`;
+            // Désactive les boutons si on est au début ou à la fin
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= items.length - 4;
+        }
+
+        // Événement pour le bouton précédent
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updatePosition();
+            }
+        });
+
+        // Événement pour le bouton suivant
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < items.length - 4) {
+                currentIndex++;
+                updatePosition();
+            }
+        });
+
+        // Initialise la position
+        updatePosition();
+    });
+});
