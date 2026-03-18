@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AppartementController extends AbstractController
 {
-    #[Route('/appartement', name: 'app_appartement')]
-    public function index(AppartementRepository $appartementRepository): Response
+    #[Route('/appartement/{id}', name: 'app_appartement')]
+    public function index(AppartementRepository $appartementRepository, int $id): Response
     {
-        $appartement=$appartementRepository->find(2);
+        $appartement=$appartementRepository->find($id);
 
         return $this->render('appartement/index.html.twig', [
             'appartement'=>$appartement,

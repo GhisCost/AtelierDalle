@@ -57,14 +57,14 @@
     spheres[6].position.set(-3.5, -3.5, 0); // bas gauche extérieur
     spheres[7].position.set(-1.5, -3.5, 0); // bas gauche
 
-    spheres[0].userData = { link: routes.page1, label: "Accueil" };
-    spheres[1].userData = { link: routes.page2, label: "Profil" };
-    spheres[2].userData = { link: routes.page3, label: "Projets" };
-    spheres[3].userData = { link: routes.page4, label: "Contact" };
-    spheres[4].userData = { link: routes.page5, label: "Blog" };
-    spheres[5].userData = { link: routes.page6, label: "Galerie" };
-    spheres[6].userData = { link: routes.page7, label: "Paramètres" };
-    spheres[7].userData = { link: routes.page8, label: "À propos" };
+    spheres[0].userData = { link: routes.page1, label: "Dispositifs" };
+    spheres[1].userData = { link: routes.page2, label: "Chantier de la dalle" };
+    spheres[2].userData = { link: routes.page3, label: "Atelier du Tiers Inclus" };
+    spheres[3].userData = { link: routes.page4, label: "Cultures" };
+    spheres[4].userData = { link: routes.page5, label: "Co-habiter avec le chantier" };
+    spheres[5].userData = { link: routes.page6, label: "Mémoire du quartier" };
+    spheres[6].userData = { link: routes.page7, label: "Atelier de la dalle" };
+    spheres[7].userData = { link: routes.page8, label: "Arbre à Palabre" };
 
     spheres.forEach((s) => scene.add(s));
     // calcul du centre de toutes les sphères
@@ -125,6 +125,7 @@
         mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
+        
         raycaster.setFromCamera(mouse, camera);
         const intersects = raycaster.intersectObjects(spheres);
 

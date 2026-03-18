@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Enum\Categorie;
 use App\Repository\MediaAppartementRepository;
 use Doctrine\ORM\Mapping as ORM;
-use App\Enum\Categorie;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 

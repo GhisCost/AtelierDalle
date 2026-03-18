@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dispositifs{% endblock %}
+
+{% block body %}
+
+	<div class="flex flex-col items-center">
+
+		<a class="no-underline text-black w-70 p-6" href="" >
+			Arbre à Palabres
+		</a>
+		<a class="no-underline text-black w-70 p-6" href="" >
+			Atelier de la dalle
+		</a>
+	
+		<a class="no-underline text-black w-70 p-6" href="{{ path('app_accueil_chantier') }}">
+			Retour au chantier
+		</a>
+
+	</div>
+
+{% endblock %}
