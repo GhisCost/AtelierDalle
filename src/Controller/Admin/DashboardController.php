@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Appartement;
+use App\Entity\ArchiveMedia;
 use App\Entity\AteliersPlantes;
 use App\Entity\Barrieres;
 use App\Entity\BruitChantier;
@@ -72,6 +73,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Media Autre', 'fa fa-photo-film', MediaAutre::class);
 
+        yield MenuItem::linkToCrud('Photo Anciennes', 'fa fa-photo-film', ArchiveMedia::class);
 
         yield MenuItem::section('Portraits');
         yield MenuItem::linkToCrud('Portraits Habitant', 'fa fa-users', PortraitHabitant::class);

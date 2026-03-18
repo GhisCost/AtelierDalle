@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\Categorie;
 use App\Repository\MediaAppartementRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -28,6 +29,9 @@ class MediaAppartement
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column(enumType: Categorie::class)]
+    private ?Categorie $Categorie = null;
 
     public function getId(): ?int
     {
@@ -73,5 +77,17 @@ class MediaAppartement
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->Categorie;
+    }
+
+    public function setCategorie(Categorie $Categorie): static
+    {
+        $this->Categorie = $Categorie;
+
+        return $this;
     }
 }
