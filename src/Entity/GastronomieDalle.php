@@ -16,21 +16,21 @@ class GastronomieDalle
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Nom = null;
+    private ?string $nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'gastronomieDalles')]
-    private ?CultureDuMonde $CultureMonde = null;
+    private ?CultureDuMonde $cultureMonde = null;
 
     /**
      * @var Collection<int, MediaGastronomie>
      */
-    #[ORM\OneToMany(targetEntity: MediaGastronomie::class, mappedBy: 'Gastronomie')]
+    #[ORM\OneToMany(targetEntity: MediaGastronomie::class, mappedBy: 'gastronomie')]
     private Collection $mediaGastronomies;
 
     /**
      * @var Collection<int, TexteGastronomie>
      */
-    #[ORM\OneToMany(targetEntity: TexteGastronomie::class, mappedBy: 'Gastronomie')]
+    #[ORM\OneToMany(targetEntity: TexteGastronomie::class, mappedBy: 'gastronomie')]
     private Collection $contenu;
 
     public function __construct()
@@ -46,24 +46,24 @@ class GastronomieDalle
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(string $Nom): static
+    public function setNom(string $nom): static
     {
-        $this->Nom = $Nom;
+        $this->nom = $nom;
 
         return $this;
     }
 
     public function getCultureMonde(): ?CultureDuMonde
     {
-        return $this->CultureMonde;
+        return $this->cultureMonde;
     }
 
-    public function setCultureMonde(?CultureDuMonde $CultureMonde): static
+    public function setCultureMonde(?CultureDuMonde $cultureMonde): static
     {
-        $this->CultureMonde = $CultureMonde;
+        $this->cultureMonde = $cultureMonde;
 
         return $this;
     }
@@ -126,5 +126,9 @@ class GastronomieDalle
         }
 
         return $this;
+    }
+     public function __toString(): string
+    {
+        return $this->nom;
     }
 }

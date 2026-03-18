@@ -16,10 +16,13 @@ class TexteGastronomie
 
     #[ORM\ManyToOne(inversedBy: 'contenu')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?GastronomieDalle $Gastronomie = null;
+    private ?GastronomieDalle $gastronomie = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $categorie = null;
 
     public function getId(): ?int
     {
@@ -28,12 +31,12 @@ class TexteGastronomie
 
     public function getGastronomie(): ?GastronomieDalle
     {
-        return $this->Gastronomie;
+        return $this->gastronomie;
     }
 
-    public function setGastronomie(?GastronomieDalle $Gastronomie): static
+    public function setGastronomie(?GastronomieDalle $gastronomie): static
     {
-        $this->Gastronomie = $Gastronomie;
+        $this->gastronomie = $gastronomie;
 
         return $this;
     }
@@ -49,4 +52,17 @@ class TexteGastronomie
 
         return $this;
     }
+
+    public function getCategorie(): ?string
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(string $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+  
 }

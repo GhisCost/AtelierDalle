@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gastronomies
+{% endblock %}
+
+{% block body %}
+
+	<div class=" w-[70%] my-4 mx-auto ">
+
+		{% for dalle in gastronomie %}
+			<!-- TITRE -->
+			<h1 class="text-5xl font-bold py-8 text-center mb-6">{{ dalle.nom }}</h1>
+
+			<!-- INTRO -->
+			<p class="text-center mb-4 w-[80%] m-auto">
+				{% for texte in dalle.contenu %}
+					{% if texte.categorie == 'intro' %}
+						{{ texte.contenu }}
+					{% endif %}
+				{% endfor %}
+			</p>
+
+			<!-- IMAGE PRINCIPALE -->
+			{% set medias = dalle.mediaGastronomies|filter(m => m.lienSource) %}
+			{% set mainImage = medias|first %}
+
+			{% if mainImage %}
+				<div class="w-[80%] m-auto ">
+					<img  src="{{ asset('uploads/media/' ~ mainImage.lienSource) }}">
+				</div>
+			{% endif %}
+
+			<!-- MINIATURES -->
+			<div class=" flex w-[80%] m-auto mt-4 gap-4">
+				{% for media in medias|slice(1,4) %}
+					<div class="flex-1">
+						<img class="w-full h-40 objet-cover" src="{{ asset('uploads/media/' ~ media.lienSource) }}">
+					</div>
+				{% endfor %}
+			</div>
+
+			<!-- CONTENU 1 -->
+			<p class="text-center mb-4 w-[80%] m-auto">
+				{% for texte in dalle.contenu %}
+					{% if texte.categorie == 'contenu1' %}
+						{{ texte.contenu }}
+					{% endif %}
+				{% endfor %}
+			</p>
+            <!-- CONCLU  -->
+			<p class="mb-5">
+				{% for texte in dalle.contenu %}
+					{% if texte.categorie == 'conclu' %}
+						{{ texte.contenu }}
+					{% endif %}
+				{% endfor %}
+			</p>
+
+			
+
+		{% endfor %}
+
+	</div>
+
+{% endblock %}

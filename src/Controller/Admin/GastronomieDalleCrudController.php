@@ -20,8 +20,8 @@ class GastronomieDalleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('Nom'),
-            AssociationField::new('CultureMonde')
+            TextField::new('nom'),
+            AssociationField::new('cultureMonde')
                 ->setLabel('Culture du Monde'),
         ];
     }
