@@ -38,33 +38,33 @@
     // sphères
     const geo = new THREE.SphereGeometry(0.7, 32, 32);
     const spheres = [
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xff4444 })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x44ff44 })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x4444ff })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xffff44 })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xff44ff })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x44ffff })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xff8800 })),
-        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x8000ff })),
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xff4444 })), // rouge
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x44ff44 })), // vert
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x4444ff })), //  bleu
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x00D492 })), // turquoise
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x74D4FF })), // bleu clair
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xFF2056 })), // rose foncé
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0xff8800 })), // orange
+        new THREE.Mesh(geo, new THREE.MeshPhongMaterial({ color: 0x8000ff })), // violet
     ];
 
-    spheres[0].position.set(-3, 0, 0); // milieu gauche
-    spheres[1].position.set(2, 0, 0); // milieu droite
-    spheres[2].position.set(0, 3.5, 0); // sommet
-    spheres[3].position.set(1.5, -2.5, 0); // bas droite
-    spheres[4].position.set(3.5, -2.5, 0); // bas droite extérieur
-    spheres[5].position.set(4.5, 0, 0); // droite (CH)
-    spheres[6].position.set(-3.5, -3.5, 0); // bas gauche extérieur
-    spheres[7].position.set(-1.5, -3.5, 0); // bas gauche
+    spheres[0].position.set(-3, 0, -1); // rouge
+    spheres[1].position.set(0, -1, 2); // vert
+    spheres[2].position.set(0, 1.5, 0); //  bleu
+    spheres[3].position.set(1.5, -3, -1); // turquoise
+    spheres[4].position.set(3.5, -1, 0); // bleu clair
+    spheres[5].position.set(4.5, 2, 0); // rose foncé
+    spheres[6].position.set(-3.6, 3, 2); // orange
+    spheres[7].position.set(-4, -3, 0); // violet
 
-    spheres[0].userData = { link: routes.page1, label: "Dispositifs" };
-    spheres[1].userData = { link: routes.page2, label: "Chantier de la dalle" };
-    spheres[2].userData = { link: routes.page3, label: "Atelier du Tiers Inclus" };
-    spheres[3].userData = { link: routes.page4, label: "Cultures" };
-    spheres[4].userData = { link: routes.page5, label: "Co-habiter avec le chantier" };
-    spheres[5].userData = { link: routes.page6, label: "Mémoire du quartier" };
-    spheres[6].userData = { link: routes.page7, label: "Atelier de la dalle" };
-    spheres[7].userData = { link: routes.page8, label: "Arbre à Palabre" };
+    spheres[0].userData = {link: routes.page1, label: "Dispositifs"};
+    spheres[1].userData = {link: routes.page2, label: "Chantier de la dalle"};
+    spheres[2].userData = {link: routes.page3, label: "Atelier du Tiers Inclus"};
+    spheres[3].userData = {link: routes.page4, label: "Cultures"};
+    spheres[4].userData = {link: routes.page5, label: "Co-habiter avec le chantier"};
+    spheres[5].userData = {link: routes.page6, label: "Mémoire du quartier"};
+    spheres[6].userData = {link: routes.page7, label: "Atelier de la dalle"};
+    spheres[7].userData = {link: routes.page8, label: "Arbre à Palabre"};
 
     spheres.forEach((s) => scene.add(s));
     // calcul du centre de toutes les sphères

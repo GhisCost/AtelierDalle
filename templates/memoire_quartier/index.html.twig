@@ -3,13 +3,15 @@
 {% block title %}La mémoire du quartier{% endblock %}
 
 {% block body %}
+
+    <h1 class="text-5xl font-bold py-8 text-center mb-4">La mémoire du quartier</h1>
+
     <div class="container mx-auto px-4 py-8 space-y-12">
         {# Carrousel 1 : Portraits Habitants #}
         <div class="carousel-container">
             <h2 class="text-2xl font-bold mb-4">Portraits Habitants</h2>
             <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
                 <div class="flex transition-transform duration-300 ease-in-out" id="carousel1">
-                    
                     <div class="flex w-full">
                         {% for portrait in portraitsHabitants %}
                             {% if portrait.mediaPortraits.first is not null %}
@@ -97,9 +99,9 @@
                     <div class="flex w-full justify-between">
                         {% for media in mediaAppartementsPapierPeint %}
                             <div class="min-w-[25%] p-2 vignette">
-                                {# <a href="{{ asset('uploads/media/' ~ media.contenu) }}" target="_blank"> #}
+                                <a href="{{ path('app_papier_peint') }}" >
                                     <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="Papier peint" class="w-full h-32 object-cover rounded">
-                                {# </a> #}
+                                </a>
                             </div>
                         {% endfor %}
                     </div>

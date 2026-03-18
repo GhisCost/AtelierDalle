@@ -42,6 +42,9 @@ function drawDots() {
 function initPage() {
   
     // initCursor();
+    if (document.querySelector('.carousel-container')){
+        initCarousel()
+    }
     if (document.getElementById("canvas")) {
         initCanvas();
     }
@@ -787,7 +790,7 @@ animate();}
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+ function initCarousel() {
     // Sélectionne tous les carrousels
     let carousels = document.querySelectorAll('[id^="carousel"]');
 
@@ -799,7 +802,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let nextBtn = document.querySelector(`[data-carousel="${id}"].carousel-next`);
 
         let currentIndex = 0;
-        let itemWidth = 23; // % de la largeur d'une image
+        let itemWidth = 25; // % de la largeur d'une image
 
         // Met à jour la position du carrousel
         function updatePosition() {
@@ -829,4 +832,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialise la position
         updatePosition();
     });
-});
+};

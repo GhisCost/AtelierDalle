@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Papier peint de la Dalle{% endblock %}
+
+{% block body %}
+<h1 class="text-5xl font-bold py-8 text-center mb-8">Les Papiers Peints de la dalle</h1>
+
+<div class="flex w-[80%] m-auto flex-wrap gap-6 justify-center">
+{% for papier in papierPeint %} 
+<div class="w-[100px] h-[150px]">
+<img src=" {{asset('uploads/media/' ~ papier.contenu)}}" class="w-[100%] h-[100%]">
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}
