@@ -24,7 +24,7 @@ class GastronomieDalle
     /**
      * @var Collection<int, MediaGastronomie>
      */
-    #[ORM\OneToMany(targetEntity: MediaGastronomie::class, mappedBy: 'Gastronomie')]
+    #[ORM\OneToMany(targetEntity: MediaGastronomie::class, mappedBy: 'gastronomie')]
     private Collection $mediaGastronomies;
 
     /**
@@ -126,5 +126,10 @@ class GastronomieDalle
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->Nom;
     }
 }

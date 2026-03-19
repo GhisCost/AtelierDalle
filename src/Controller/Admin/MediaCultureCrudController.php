@@ -24,7 +24,7 @@ class MediaCultureCrudController extends AbstractCrudController
     {
           return [
         // Affiche le nom du fichier uniquement dans la liste
-        TextField::new('contenu', 'Fichier')
+        TextField::new('lien_source', 'Fichier')
             ->onlyOnIndex(), 
 
         // Champ d'upload pour le formulaire (new/edit)

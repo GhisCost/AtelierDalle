@@ -5,23 +5,50 @@
 
 {% block body %}
 
-	<div class="py-35 justify-end items-end text-right" style="direction: rtl;">
-		<a href="{{path('app_accueil_chantier')}}" class="text-sm hover:underline mr-8">
-			Retour à l'accueil
-		</a>
-		<div id="non-habitants" class="w-1/2 p-8 flex gap-8 items-center justify-center">
-			<h2 class="text-2xl font-bold mb-4 text-center bg-emerald-400 p-4 text-white">
-				Les cultures de la dalle
-			</h2>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi in assumenda temporibus libero? Corporis reiciendis, distinctio aliquid, reprehenderit voluptates eum excepturi inventore natus in earum, aperiam sunt adipisci porro eaque accusantium a. Numquam dolor sequi perspiciatis ex illo quos hic? Earum, voluptas fugit cum tenetur, neque harum ullam beatae ea maxime repudiandae nostrum nobis eum voluptatibus minima quidem officia. Est aliquam, cumque maxime praesentium numquam, quasi rem incidunt hic recusandae eligendi magnam amet ipsa magni odio debitis minima dolore reprehenderit autem placeat sed. Necessitatibus ut quos illo sunt omnis aperiam.</p>
-
-
+	<h1 class="text-5xl font-bold py-8 text-center mb-4">Cultures de la Dalle</h1>
+	
+	<div class="container mx-auto px-4 py-8 space-y-12">
+		{# Carousel cultures du monde #}
+		<div class="carousel-container">
+			<h2 class="text-2xl font-bold mb-4">Cultures du monde</h2>
+			<div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+				<div class="flex transition-transform duration-300 ease-in-out" id="carousel1">
+					<div class="flex w-full">
+						{% for culture in cultureDuMonde %}
+							{% if culture.mediaCultures.first is not null %}
+								<div class="min-w-[25%] p-2 vignette">
+									<a href="{{ path('app_portrait_habitant', {'id': culture.id}) }}">
+										<img src="{{ asset('uploads/media/' ~ culture.mediaCultures.first.liensource) }}" alt="{{ culture.nom }}" class="w-full h-32 object-cover">
+									</a>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel1">&lt;</button>
+				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel1">&gt;</button>
+			</div>
 		</div>
-		<div id="habitants" class="w-1/2 p-8 flex gap-8 items-center justify-center">
-			<h2 class="text-2xl font-bold mb-4 text-center bg-emerald-400 p-4 text-white">
-				Cultiver
-			</h2>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi in assumenda temporibus libero? Corporis reiciendis, distinctio aliquid, reprehenderit voluptates eum excepturi inventore natus in earum, aperiam sunt adipisci porro eaque accusantium a. Numquam dolor sequi perspiciatis ex illo quos hic? Earum, voluptas fugit cum tenetur, neque harum ullam beatae ea maxime repudiandae nostrum nobis eum voluptatibus minima quidem officia. Est aliquam, cumque maxime praesentium numquam, quasi rem incidunt hic recusandae eligendi magnam amet ipsa magni odio debitis minima dolore reprehenderit autem placeat sed. Necessitatibus ut quos illo sunt omnis aperiam.</p>
+		{# Carousel Gastronomie #}
+		<div class="carousel-container">
+			<h2 class="text-2xl font-bold mb-4">Gastronomie de la Dalle</h2>
+			<div class="relative overflow-hidden w-full max-w-4xl mx-auto">
+				<div class="flex transition-transform duration-300 ease-in-out" id="carousel2">
+					<div class="flex w-full">
+						{% for gastro in gastronomies %}
+							{% if gastro.mediaGastronomies.first is not null %}
+								<div class="min-w-[25%] p-2 vignette">
+									<a href="{{ path('app_portrait_habitant', {'id': gastro.id}) }}">
+										<img src="{{ asset('uploads/media/' ~ gastro.mediaGastronomies.first.liensource) }}" alt="{{ gastro.nom }}" class="w-full h-32 object-cover rounded">
+									</a>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+				<button class="carousel-prev absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel2">&lt;</button>
+				<button class="carousel-next absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md" data-carousel="carousel2">&gt;</button>
+			</div>
 		</div>
 
 	</div>
