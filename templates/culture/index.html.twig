@@ -6,7 +6,7 @@
 {% block body %}
 
 	<h1 class="text-5xl font-bold py-8 text-center mb-4">Cultures de la Dalle</h1>
-	
+
 	<div class="container mx-auto px-4 py-8 space-y-12">
 		{# Carousel cultures du monde #}
 		<div class="carousel-container">
@@ -38,7 +38,7 @@
 						{% for gastro in gastronomies %}
 							{% if gastro.mediaGastronomies.first is not null %}
 								<div class="min-w-[25%] p-2 vignette">
-									<a href="{{ path('app_portrait_habitant', {'id': gastro.id}) }}">
+									<a href="{{ path('app_gastronomie', {'id': gastro.id}) }}">
 										<img src="{{ asset('uploads/media/' ~ gastro.mediaGastronomies.first.liensource) }}" alt="{{ gastro.nom }}" class="w-full h-32 object-cover rounded">
 									</a>
 								</div>

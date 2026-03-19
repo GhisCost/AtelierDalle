@@ -10,24 +10,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class GastronomieController extends AbstractController
 {
-    // 📌 LISTE de toutes les gastronomies
-    #[Route('/gastronomie', name: 'app_gastronomie')]
-    public function index(GastronomieDalleRepository $repo): Response
+    #[Route('/gastronomie/{id}', name: 'app_gastronomie')]
+    public function index(GastronomieDalleRepository $repo,int $id): Response
     {
-        $gastronomie = $repo->findAll();
-        // dd($gastronomie);
+        $gastronomie = $repo->find($id);
+        
 
         return $this->render('gastronomie/index.html.twig', [
             'gastronomie' => $gastronomie,
         ]);
     }
 
-    // 📌 DETAIL d'une gastronomie
-    #[Route('/gastronomie/{id}', name: 'app_gastronomie_show')]
-    public function show(GastronomieDalle $gastronomie): Response
-    {
-        return $this->render('gastronomie/show.html.twig', [
-            'gastronomie' => $gastronomie,
-        ]);
-    }
+
 }

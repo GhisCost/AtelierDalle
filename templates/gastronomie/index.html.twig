@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gastronomies
+{% block title %}
+{{ gastronomie.nom }}
 {% endblock %}
 
 {% block body %}
 
 	<div class=" w-[70%] my-4 mx-auto ">
 
-		{% for dalle in gastronomie %}
+		
 			<!-- TITRE -->
-			<h1 class="text-5xl font-bold py-8 text-center mb-6">{{ dalle.nom }}</h1>
+			<h1 class="text-5xl font-bold py-8 text-center mb-6">{{ gastronomie.nom }}</h1>
 
 			<!-- INTRO -->
-			<p class="text-center mb-4 w-[80%] m-auto">
-				{% for texte in dalle.contenu|filter(t => t.categorie == 'intro' or t.categorie == 'Intro' or t.categorie == 'Introduction' or t.categorie == 'introduction' or t.categorie == 'introducción' ) %}
+			<p class="text-justify mb-4 w-[80%] m-auto">
+				{% for texte in gastronomie.contenu|filter(t => t.categorie == 'intro' or t.categorie == 'Intro' or t.categorie == 'Introduction' or t.categorie == 'introduction' or t.categorie == 'introducción' ) %}
 					{% if texte.categorie == 'intro' %}
 						{{ texte.contenu }}
 					{% endif %}
@@ -21,7 +22,7 @@
 			</p>
 
 			<!-- IMAGE PRINCIPALE -->
-			{% set medias = dalle.mediaGastronomies|filter(m => m.lienSource) %}
+			{% set medias = gastronomie.mediaGastronomies|filter(m => m.lienSource) %}
 			{% set mainImage = medias|first %}
 
 			{% if mainImage %}
@@ -31,7 +32,7 @@
 			{% endif %}
 
 			<!-- MINIATURES -->
-			<div class=" flex w-[80%] m-auto mt-4 gap-4">
+			<div class=" flex w-[80%] m-auto mt-4 gap-4 mb-4">
 				{% for media in medias|slice(1,4) %}
 					<div class="flex-1">
 						<img class="w-full h-40 objet-cover" src="{{ asset('uploads/media/' ~ media.lienSource) }}">
@@ -39,16 +40,16 @@
 				{% endfor %}
 			</div>
 
-			<!-- CONTENU 1 -->
-			{% for texte in dalle.contenu|filter(t => t.categorie != 'intro' and t.categorie != 'conclu') %}
-				<p class="text-center mb-4 w-[80%] m-auto">
+			<!-- chapitres  -->
+			{% for texte in gastronomie.contenu|filter(t => t.categorie != 'intro' and t.categorie != 'conclu') %}
+				<p class="text-justify mb-4 w-[80%] m-auto">
 					{{ texte.contenu }}
 				</p>
 			{% endfor %}
 
 			<!-- CONCLU  -->
-			<p class="text-center mb-4 w-[80%] m-auto">
-				{% for texte in dalle.contenu|filter(t => t.categorie == 'conclu' or t.categorie == 'Conclu' or t.categorie == 'conclusion' or t.categorie == 'Conclusion' or t.categorie == 'concl' or t.categorie == 'conclusión' or t.categorie =='Concl' or t.categorie == 'Conclusión'  ) %}
+			<p class="text-justify mb-4 w-[80%] m-auto">
+				{% for texte in gastronomie.contenu|filter(t => t.categorie == 'conclu' or t.categorie == 'Conclu' or t.categorie == 'conclusion' or t.categorie == 'Conclusion' or t.categorie == 'concl' or t.categorie == 'conclusión' or t.categorie =='Concl' or t.categorie == 'Conclusión'  ) %}
 					{% if texte.categorie == 'conclu' %}
 						{{ texte.contenu }}
 					{% endif %}
@@ -56,7 +57,7 @@
 			</p>
 
 
-		{% endfor %}
+		
 
 	</div>
 
