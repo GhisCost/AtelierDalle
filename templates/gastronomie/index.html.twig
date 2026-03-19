@@ -13,7 +13,7 @@
 
 			<!-- INTRO -->
 			<p class="text-center mb-4 w-[80%] m-auto">
-				{% for texte in dalle.contenu %}
+				{% for texte in dalle.contenu|filter(t => t.categorie == 'intro' or t.categorie == 'Intro' or t.categorie == 'Introduction' or t.categorie == 'introduction' or t.categorie == 'introducción' ) %}
 					{% if texte.categorie == 'intro' %}
 						{{ texte.contenu }}
 					{% endif %}
@@ -26,7 +26,7 @@
 
 			{% if mainImage %}
 				<div class="w-[80%] m-auto ">
-					<img  src="{{ asset('uploads/media/' ~ mainImage.lienSource) }}">
+					<img src="{{ asset('uploads/media/' ~ mainImage.lienSource) }}">
 				</div>
 			{% endif %}
 
@@ -40,23 +40,21 @@
 			</div>
 
 			<!-- CONTENU 1 -->
+			{% for texte in dalle.contenu|filter(t => t.categorie != 'intro' and t.categorie != 'conclu') %}
+				<p class="text-center mb-4 w-[80%] m-auto">
+					{{ texte.contenu }}
+				</p>
+			{% endfor %}
+
+			<!-- CONCLU  -->
 			<p class="text-center mb-4 w-[80%] m-auto">
-				{% for texte in dalle.contenu %}
-					{% if texte.categorie == 'contenu1' %}
-						{{ texte.contenu }}
-					{% endif %}
-				{% endfor %}
-			</p>
-            <!-- CONCLU  -->
-			<p class="mb-5">
-				{% for texte in dalle.contenu %}
+				{% for texte in dalle.contenu|filter(t => t.categorie == 'conclu' or t.categorie == 'Conclu' or t.categorie == 'conclusion' or t.categorie == 'Conclusion' or t.categorie == 'concl' or t.categorie == 'conclusión' or t.categorie =='Concl' or t.categorie == 'Conclusión'  ) %}
 					{% if texte.categorie == 'conclu' %}
 						{{ texte.contenu }}
 					{% endif %}
 				{% endfor %}
 			</p>
 
-			
 
 		{% endfor %}
 
