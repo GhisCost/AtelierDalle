@@ -17,7 +17,7 @@
 						{% for culture in cultureDuMonde %}
 							{% if culture.mediaCultures.first is not null %}
 								<div class="min-w-[25%] p-2 vignette">
-									<a href="{{ path('app_portrait_habitant', {'id': culture.id}) }}">
+									<a href="{{ path('app_page_culture', {'id': culture.id}) }}">
 										<img src="{{ asset('uploads/media/' ~ culture.mediaCultures.first.liensource) }}" alt="{{ culture.nom }}" class="w-full h-32 object-cover">
 									</a>
 								</div>
