@@ -25,7 +25,7 @@ class CultureDuMonde
     /**
      * @var Collection<int, MediaCulture>
      */
-    #[ORM\OneToMany(targetEntity: MediaCulture::class, mappedBy: 'CultureMonde')]
+    #[ORM\OneToMany(targetEntity: MediaCulture::class, mappedBy: 'cultureMonde')]
     private Collection $mediaCultures;
 
     /**

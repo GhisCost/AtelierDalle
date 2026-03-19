@@ -4,13 +4,11 @@
   min-height: 100vh; 
   overflow: visible; 
 }
-
 .corps {
   position: relative;
   width: 100%;
   height: auto;    
 }
-
 /* couche animée */
 .page-transition {
   position: absolute;
@@ -22,25 +20,21 @@
   z-index: 50;
   transition: transform 1s ease;
 }
-
 /* positions de départ */
 .from-left   { transform: translateX(-100%); }
 .from-right  { transform: translateX(100%); }
 .from-bottom { transform: translateY(100%); }
-
 /* position finale */
 .page-transition.show {
   transform: translate(0, 0);
 }
-
 #canvas {
   position: fixed;
   z-index: -1;
   top: 0;
 }
 
-
-
+/* Minimap */
 #atom{
 position:fixed;
 top:0;
@@ -78,6 +72,3 @@ pointer-events:auto;
     scale: 0.1;
     transition: all 5s ease-in;
 }
-
-/* Css carousel !! */
-

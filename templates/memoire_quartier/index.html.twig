@@ -3,19 +3,21 @@
 {% block title %}La mémoire du quartier{% endblock %}
 
 {% block body %}
+
+    <h1 class="text-5xl font-bold py-8 text-center mb-4">La mémoire du quartier</h1>
+
     <div class="container mx-auto px-4 py-8 space-y-12">
         {# Carrousel 1 : Portraits Habitants #}
         <div class="carousel-container">
             <h2 class="text-2xl font-bold mb-4">Portraits Habitants</h2>
             <div class="relative overflow-hidden w-full max-w-4xl mx-auto">
                 <div class="flex transition-transform duration-300 ease-in-out" id="carousel1">
-                    
                     <div class="flex w-full">
                         {% for portrait in portraitsHabitants %}
                             {% if portrait.mediaPortraits.first is not null %}
-                                <div class="min-w-[23%] p-2 vignette">
+                                <div class="min-w-[25%] p-2 vignette">
                                     <a href="{{ path('app_portrait_habitant', {'id': portrait.id}) }}">
-                                        <img src="{{ asset('uploads/media/' ~ portrait.mediaPortraits.first.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-32 object-cover rounded">
+                                        <img src="{{ asset('uploads/media/' ~ portrait.mediaPortraits.first.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-32 object-cover ">
                                     </a>
                                 </div>
                             {% endif %}
@@ -35,9 +37,9 @@
                     <div class="flex w-full">
                         {% for portrait in portraitsNonHabitants %}
                             {% for media in portrait.mediaPortraits %}
-                                <div class="min-w-[23%] p-2 vignette">
+                                <div class="min-w-[25%] p-2 vignette">
                                     {# <a href="{{ path('app_portrait_non_habitant_show', {'id': portrait.id}) }}"> #}
-                                        <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-32 object-cover rounded">
+                                        <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ portrait.prenom }}" class="w-full h-32 object-cover ">
                                     {# </a> #}
                                 </div>
                             {% endfor %}
@@ -56,10 +58,10 @@
                 <div class="flex transition-transform duration-300 ease-in-out" id="carousel3">
                     <div class="flex w-full">
                         {% for item in appartementsAvecPhoto %}
-                            <div class="min-w-[23%] p-2 vignette">
-                                {# <a href="{{ path('app_memoire_quartier', {'id': item.appartement.id}) }}"> #}
-                                    <img src="{{ asset('uploads/media/' ~ item.photo.contenu) }}" alt="Photo appartement {{ item.appartement.Numero }}" class="w-full h-32 object-cover rounded">
-                                {# </a> #}
+                            <div class="min-w-[25%] p-2 vignette">
+                                <a href="{{ path('app_appartement', {'id': item.appartement.id}) }}">
+                                    <img src="{{ asset('uploads/media/' ~ item.photo.contenu) }}" alt="Photo appartement {{ item.appartement.Numero }}" class="w-full h-32 object-cover">
+                                </a>
                             </div>
                         {% endfor %}
                     </div>
@@ -76,9 +78,9 @@
                 <div class="flex transition-transform duration-300 ease-in-out" id="carousel4">
                     <div class="flex w-full">
                         {% for media in archivesMedia %}
-                            <div class="min-w-[23%] p-2">
+                            <div class="min-w-[25%] p-2">
                                 {# <a href="{{ asset('uploads/media/' ~ media.contenu) }}" target="_blank"> #}
-                                    <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ media.description }}" class="w-full h-32 object-cover rounded">
+                                    <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="{{ media.description }}" class="w-full h-32 object-cover ">
                                 {# </a> #}
                             </div>
                         {% endfor %}
@@ -96,10 +98,10 @@
                 <div class="flex transition-transform duration-300 ease-in-out " id="carousel5">
                     <div class="flex w-full justify-between">
                         {% for media in mediaAppartementsPapierPeint %}
-                            <div class="min-w-[23%] p-2 vignette">
-                                {# <a href="{{ asset('uploads/media/' ~ media.contenu) }}" target="_blank"> #}
-                                    <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="Papier peint" class="w-full h-32 object-cover rounded">
-                                {# </a> #}
+                            <div class="min-w-[25%] p-2 vignette">
+                                <a href="{{ path('app_papier_peint') }}" >
+                                    <img src="{{ asset('uploads/media/' ~ media.contenu) }}" alt="Papier peint" class="w-full h-32 object-cover ">
+                                </a>
                             </div>
                         {% endfor %}
                     </div>

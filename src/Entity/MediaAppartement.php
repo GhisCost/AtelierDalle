@@ -15,6 +15,7 @@ class MediaAppartement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'mediaAppartements')]
@@ -68,7 +69,7 @@ class MediaAppartement
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
-
+  
     public function getFile(): ?File
     {
         return $this->file;
@@ -79,15 +80,15 @@ class MediaAppartement
         return $this->updatedAt;
     }
 
-    public function getCategorie(): ?Categorie
+     public function getCategorie(): ?Categorie
     {
         return $this->Categorie;
     }
-
+ 
     public function setCategorie(Categorie $Categorie): static
     {
         $this->Categorie = $Categorie;
-
+ 
         return $this;
     }
 }
