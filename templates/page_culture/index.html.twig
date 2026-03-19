@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Culture {{ culture.Nom }}{% endblock %}
+
+{% block body %}
+<h1 class="text-center pt-[10vh] font-bold pb-[5vh] text-5xl">{{ culture.Nom }}</h1>
+<div class="container flex w-[90%] m-auto gap-4">
+    <div class="flex flex-col gap-4 items-center w-[50%]">
+        <p class="mb-4 text-center pb-[5vh]">{{ culture.Description }}</p>
+
+        {# Carré d'images (ID 0 à 3) #}
+        <div class="grid grid-cols-2 gap-2 w-[300px] h-[300px] mx-auto">
+            {% for i in 0..3 %}
+                {% set media = culture.mediaCultures[i] %}
+                {% if media %}
+                    <img class="w-[80%] h-[80%]" src="{{ asset('uploads/media/' ~ media.liensource) }}"
+                         alt="Média de {{ culture.Nom }}"
+                         class="w-[150px] h-[150px] object-cover">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {# Carré d'images (ID 4 à 7) #}
+        <div class="grid grid-cols-2 gap-2 w-[300px] h-[300px] mx-auto">
+            {% for i in 4..7 %}
+                {% set media = culture.mediaCultures[i] %}
+                {% if media %}
+                    <img class="w-[90%] h-[90%]" src="{{ asset('uploads/media/' ~ media.liensource) }}"
+                         alt="Média de {{ culture.Nom }}"
+                         class="w-[150px] h-[150px] object-cover">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex flex-col gap-4 items-end w-[50%]">
+        {# Images de la colonne de droite (ID 8 et 9) #}
+        {% for i in 8..9 %}
+            {% set media = culture.mediaCultures[i] %}
+            {% if media %}
+                <img src="{{ asset('uploads/media/' ~ media.liensource) }}"
+                     alt="Média de {{ culture.Nom }}"
+                     class="w-[350px] h-[250px] object-cover mb-4">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
